@@ -1,5 +1,5 @@
 //! 1
-let money = 1000;;
+let money = 1000;
 let income = 'фриланс';
 let addExpenses = 'Интернет, Такси, Коммуналка';
 let deposit = true;
@@ -25,8 +25,9 @@ console.log(`Цель заработать ${mission} рублей/доллар�
 
 //* 2.4
 let lowerCase = addExpenses.toLocaleLowerCase();
+result = lowerCase.split(', ');
 
-console.log(lowerCase.split(', '));
+console.log(result);
 
 //* 2.5
 
