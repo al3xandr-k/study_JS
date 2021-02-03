@@ -2,7 +2,7 @@
 
 let money = +prompt('Ваш месячный доход?', 55000);
 let addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую:');
-let deposit = prompt('Есть ли у вас депозит в банке? Да / нет');
+let deposit = confirm('Есть ли у вас депозит в банке? Да / нет');
 let expenses1 = prompt('Введите обязательную статью расходов?');
 let amount1 = +prompt('Во сколько это обойдется?', 25000);
 let expenses2 = prompt('Введите обязательную статью расходов?');
@@ -13,8 +13,6 @@ let mission = 200000;
 let period = 6;
 
 let resultArr = addExpenses.toLocaleLowerCase().split(', ');
-
-deposit = deposit === "Да" || deposit === 'да' ? true : false;
 
 function getExpensesMonth(sum1, sum2) {
   return (sum1 + sum2);
