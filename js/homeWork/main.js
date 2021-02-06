@@ -1,56 +1,46 @@
 'use strict';
 
-let isNumber = n => {
+let money;
+let expenses = [];
+let income = 'фриланс';
+let mission = 200000;
+let period = 6;
+let budgetDay;
+let addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую:');
+let deposit = confirm('Есть ли у вас депозит в банке? Да / нет');
+let resultArr; 
+let expensesAmount;
+
+
+const isNumber = n => {
   return !isNaN(parseFloat(n)) && isFinite(n)
 };
 
-let money;
-let addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую:');
-let deposit = confirm('Есть ли у вас депозит в банке? Да / нет');
-
-let start = () => {
+const start = () => {
   money = prompt('Ваш месячный доход?');
 
   while (!isNumber(money)) {
     money = prompt('Ваш месячный доход?');
   }
-
 };
 
-start();
-
-let expenses = [];
-
-
-let income = 'фриланс';
-let mission = 200000;
-let period = 6;
-
-let resultArr = addExpenses.toLocaleLowerCase().split(', ');
-
-let getExpensesMonth = () => {
+const getExpensesMonth = () => {
   let sum = 0;
 
   for (let i = 0; i < 2; i++) {
     expenses[i] = prompt('Введите обязательную статью расходов?');
     sum += +prompt('Во сколько это обойдется?');
   }
-
   return sum;
 };
 
-let expensesAmount = getExpensesMonth();
-
-let accumulatedMonth = function () {
+const accumulatedMonth = () => {
   return (money - expensesAmount);
 };
 
-let budgetDay = (accumulatedMonth() / 30);
-
-let getTargetMonth = () => {
-
+const getTargetMonth = () => {
   let result = (mission - (period * accumulatedMonth())) / accumulatedMonth();
-
+  
   if (result > 0) {
     console.log('Цель будет достигнута');
   } else if (result < 0) {
@@ -60,11 +50,11 @@ let getTargetMonth = () => {
   return result;
 };
 
-function showTypeOf(val) {
+const showTypeOf = val => {
   console.log(val, typeof (val));
 }
 
-function getStatusIncome(param) {
+const getStatusIncome = param => {
   if (param > 1200) {
     console.log('У вас высокий уровень дохода');
   } else if (param > 600 && param < 1200) {
@@ -76,11 +66,15 @@ function getStatusIncome(param) {
   }
 };
 
+start();
+
+resultArr = addExpenses.toLocaleLowerCase().split(', ');
+expensesAmount = getExpensesMonth();
+budgetDay = (accumulatedMonth() / 30);
 
 showTypeOf(money);
 showTypeOf(income);
 showTypeOf(deposit);
-
 getStatusIncome(budgetDay);
 
 console.log(resultArr);
