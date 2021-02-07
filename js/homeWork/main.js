@@ -12,11 +12,10 @@ let resultArr;
 let expensesAmount;
 
 
-const isNumber = n => {
-  return !isNaN(parseFloat(n)) && isFinite(n)
-};
+const isNumber = n => !isNaN(parseFloat(n)) && isFinite(n);
+const showTypeOf = val => console.log(val, typeof (val));
 
-const start = () => {
+const start = function() {
   money = prompt('Ваш месячный доход?');
 
   while (!isNumber(money)) {
@@ -24,7 +23,7 @@ const start = () => {
   }
 };
 
-const getExpensesMonth = () => {
+const getExpensesMonth = function() {
   let sum = 0;
 
   for (let i = 0; i < 2; i++) {
@@ -34,11 +33,11 @@ const getExpensesMonth = () => {
   return sum;
 };
 
-const accumulatedMonth = () => {
+const accumulatedMonth = function() {
   return (money - expensesAmount);
 };
 
-const getTargetMonth = () => {
+const getTargetMonth = function() {
   let result = (mission - (period * accumulatedMonth())) / accumulatedMonth();
   
   if (result > 0) {
@@ -50,11 +49,7 @@ const getTargetMonth = () => {
   return result;
 };
 
-const showTypeOf = val => {
-  console.log(val, typeof (val));
-}
-
-const getStatusIncome = param => {
+const getStatusIncome = function(param) {
   if (param > 1200) {
     console.log('У вас высокий уровень дохода');
   } else if (param > 600 && param < 1200) {
