@@ -17,13 +17,15 @@ let appData = {
   expensesMonth: 0,
   expenses: {},
   getExpensesMonth: () => {
+    let sum = 0;
     for (let key in appData.expenses) {
-      console.log(appData.expensesMonth += appData.expenses[key]);
+      console.log('getExpensesMonth-Result: ', sum += appData.expenses[key]);
     }
+    return sum;
   },
-  getAccumulatedMonth: () => (money - expensesAmount),
+  getBudget: () => (money - expensesAmount),
   getTargetMonth: () => {
-    let result = (mission - (period * appData.getAccumulatedMonth())) / appData.getAccumulatedMonth();
+    let result = (mission - (period * appData.getBudget())) / appData.getBudget();
 
     if (result > 0) {
       console.log('Цель будет достигнута');
@@ -51,6 +53,7 @@ let appData = {
   },
 
 };
+console.log('appData expensesMonth: ', appData.expensesMonth);
 appData.asking();
 
 
@@ -65,7 +68,7 @@ const start = () => {
 };
 
 const expensesMonth = appData.getExpensesMonth();
-const accumulatedMonth = appData.getAccumulatedMonth();
+const accumulatedMonth = appData.getBudget();
 const targetMonth = appData.getTargetMonth();
 const statusIncome = appData.getStatusIncome();
 
@@ -73,7 +76,7 @@ start();
 
 resultArr = addExpenses.toLocaleLowerCase().split(', ');
 expensesAmount = expensesMonth;
-budgetDay = (appData.getAccumulatedMonth() / 30);
+budgetDay = (appData.getBudget() / 30);
 
 appData.getStatusIncome(budgetDay);
 
