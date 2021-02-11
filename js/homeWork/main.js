@@ -1,13 +1,22 @@
 'use strict';
 
-let money;
-let income = 'фриланс';
 let addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую:');
 let deposit = confirm('Есть ли у вас депозит в банке? Да / нет');
 let resultArr;
+let money;
+
+const isNumber = n => !isNaN(parseFloat(n)) && isFinite(n);
+const start = () => {
+  appData.budget = prompt('Ваш месячный доход?');
+
+  while (!isNumber(appData.budget)) {
+    appData.budget = prompt('Ваш месячный доход?');
+  }
+};
 
 let appData = {
   budget: money,
+  income: {},
   mission: 200000,
   period: 6,
   budgetDay: 0,
@@ -19,11 +28,11 @@ let appData = {
       appData.expensesMonth += appData.expenses[key];
     }
   },
-  getBudget: () => (money - appData.expensesMonth),
+  getBudget: () => (appData.budget - appData.expensesMonth),
   getTargetMonth: () => {
     let result = (appData.mission - (appData.period * appData.getBudget())) / appData.getBudget();
 
-    if (result > 0) {
+    if (result> 0) {
       console.log('Цель будет достигнута');
     } else if (result < 0) {
       console.log('Цель не будет достигнута');
@@ -49,29 +58,18 @@ let appData = {
   },
 
 };
-
 appData.asking();
-
-const isNumber = n => !isNaN(parseFloat(n)) && isFinite(n);
-const start = () => {
-  money = prompt('Ваш месячный доход?');
-
-  while (!isNumber(money)) {
-    money = prompt('Ваш месячный доход?');
-  }
-};
+start();
 
 const expensesMonth = appData.getExpensesMonth();
 const accumulatedMonth = appData.getBudget();
 const targetMonth = appData.getTargetMonth();
 const statusIncome = appData.getStatusIncome();
 
-start();
-
 resultArr = addExpenses.toLocaleLowerCase().split(', ');
 appData.budgetDay = (appData.getBudget() / 30);
 appData.getStatusIncome(appData.budgetDay);
 
-console.log(resultArr);
+console.log('resultArr: ', resultArr);
 console.log('budgetDay: ', Math.floor(appData.budgetDay));
 console.log('Сколько месяцев осталось до цели:', appData.getTargetMonth());
