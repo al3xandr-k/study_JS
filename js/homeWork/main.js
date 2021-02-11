@@ -19,9 +19,6 @@ let appData = {
   mission: 200000,
   period: 6,
   budgetDay: 0,
-  // budgetDayFunc: () => {
-  //   (appData.getBudget() / 30)
-  // },
   budgetMonth: 0,
   expensesMonth: 0,
   expenses: {},
@@ -30,11 +27,14 @@ let appData = {
       appData.expensesMonth += appData.expenses[key];
     }
   },
+  getBudgetDay: () => {
+    appData.budgetDay = Math.floor(appData.getBudget() / 30);
+  },
   getBudget: () => (appData.budget - appData.expensesMonth),
   getTargetMonth: () => {
     let result = (appData.mission - (appData.period * appData.getBudget())) / appData.getBudget();
 
-    if (result> 0) {
+    if (result > 0) {
       console.log('Цель будет достигнута');
     } else if (result < 0) {
       console.log('Цель не будет достигнута');
@@ -60,17 +60,15 @@ let appData = {
   }
 };
 
+start();
 appData.asking();
 appData.getExpensesMonth();
 appData.getBudget();
-appData.getTargetMonth();
-appData.getStatusIncome();
-start();
-
-resultArr = addExpenses.toLocaleLowerCase().split(', ');
-appData.budgetDay = (appData.getBudget() / 30);
+// appData.getTargetMonth();
+appData.getBudgetDay();
 appData.getStatusIncome(appData.budgetDay);
 
 
-console.log('budgetDay: ', Math.floor(appData.budgetDay));
+// resultArr = addExpenses.toLocaleLowerCase().split(', ');
+
 console.log('Сколько месяцев осталось до цели:', appData.getTargetMonth());
