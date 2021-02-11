@@ -64,11 +64,11 @@ start();
 appData.asking();
 appData.getExpensesMonth();
 appData.getBudget();
-// appData.getTargetMonth();
 appData.getBudgetDay();
 appData.getStatusIncome(appData.budgetDay);
 
 
 // resultArr = addExpenses.toLocaleLowerCase().split(', ');
 
+console.log('Расходы за месяц: ', appData.expensesMonth);
 console.log('Сколько месяцев осталось до цели:', appData.getTargetMonth());
