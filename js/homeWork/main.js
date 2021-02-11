@@ -1,7 +1,5 @@
 'use strict';
 
-let addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую:');
-let deposit = confirm('Есть ли у вас депозит в банке? Да / нет');
 let money;
 
 const isNumber = n => !isNaN(parseFloat(n)) && isFinite(n);
@@ -18,6 +16,8 @@ let appData = {
   income: {},
   mission: 200000,
   period: 6,
+  deposit: false,
+  addExpenses: [],
   budgetDay: 0,
   budgetMonth: 0,
   expensesMonth: 0,
@@ -53,6 +53,9 @@ let appData = {
     }
   },
   asking: () => {
+    let addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую:');
+    appData.addExpenses = addExpenses.toLocaleLowerCase().split(', ');
+    appData.deposit = confirm('Есть ли у вас депозит в банке? Да / нет');
     for (let i = 0; i < 2; i++) {
       appData.expenses[prompt('Введите обязательную статью расходов?')] = +prompt('Во сколько это обойдется?');
     }
@@ -66,9 +69,6 @@ appData.getExpensesMonth();
 appData.getBudget();
 appData.getBudgetDay();
 appData.getStatusIncome(appData.budgetDay);
-
-
-// resultArr = addExpenses.toLocaleLowerCase().split(', ');
 
 console.log('Расходы за месяц: ', appData.expensesMonth);
 console.log('Сколько месяцев осталось до цели:', appData.getTargetMonth());
