@@ -67,11 +67,6 @@ appData.getTargetMonth();
 appData.getStatusIncome();
 start();
 
-// const expensesMonth = appData.getExpensesMonth();
-// const accumulatedMonth = appData.getBudget();
-// const targetMonth = appData.getTargetMonth();
-// const statusIncome = appData.getStatusIncome();
-
 resultArr = addExpenses.toLocaleLowerCase().split(', ');
 appData.budgetDay = (appData.getBudget() / 30);
 appData.getStatusIncome(appData.budgetDay);
