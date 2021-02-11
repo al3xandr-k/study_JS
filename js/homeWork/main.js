@@ -2,7 +2,6 @@
 
 let addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую:');
 let deposit = confirm('Есть ли у вас депозит в банке? Да / нет');
-let resultArr;
 let money;
 
 const isNumber = n => !isNaN(parseFloat(n)) && isFinite(n);
@@ -20,6 +19,9 @@ let appData = {
   mission: 200000,
   period: 6,
   budgetDay: 0,
+  // budgetDayFunc: () => {
+  //   (appData.getBudget() / 30)
+  // },
   budgetMonth: 0,
   expensesMonth: 0,
   expenses: {},
@@ -55,21 +57,25 @@ let appData = {
       appData.expenses[prompt('Введите обязательную статью расходов?')] = +prompt('Во сколько это обойдется?');
     }
     return;
-  },
-
+  }
 };
+
 appData.asking();
+appData.getExpensesMonth();
+appData.getBudget();
+appData.getTargetMonth();
+appData.getStatusIncome();
 start();
 
-const expensesMonth = appData.getExpensesMonth();
-const accumulatedMonth = appData.getBudget();
-const targetMonth = appData.getTargetMonth();
-const statusIncome = appData.getStatusIncome();
+// const expensesMonth = appData.getExpensesMonth();
+// const accumulatedMonth = appData.getBudget();
+// const targetMonth = appData.getTargetMonth();
+// const statusIncome = appData.getStatusIncome();
 
 resultArr = addExpenses.toLocaleLowerCase().split(', ');
 appData.budgetDay = (appData.getBudget() / 30);
 appData.getStatusIncome(appData.budgetDay);
 
-console.log('resultArr: ', resultArr);
+
 console.log('budgetDay: ', Math.floor(appData.budgetDay));
 console.log('Сколько месяцев осталось до цели:', appData.getTargetMonth());
