@@ -70,5 +70,15 @@ appData.getBudget();
 appData.getBudgetDay();
 appData.getStatusIncome(appData.budgetDay);
 
+const abc = () => {
+  console.log('Наша программа включает в себя данные: ');
+  for (let key in appData) {
+    console.log(`
+    Свойства: ${key}
+    Значение: ${appData[key]}
+  `);
+  }
+}
+abc();
 console.log('Расходы за месяц: ', appData.expensesMonth);
 console.log('Сколько месяцев осталось до цели:', appData.getTargetMonth());
