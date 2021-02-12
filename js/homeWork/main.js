@@ -15,8 +15,10 @@ let appData = {
   budget: money,
   income: {},
   mission: 200000,
-  period: 6,
+  period: 3,
   deposit: false,
+  percentDeposit: 0,
+  moneyDeposit: 0,
   addExpenses: [],
   budgetDay: 0,
   budgetMonth: 0,
@@ -24,50 +26,69 @@ let appData = {
   expenses: {},
   getExpensesMonth: () => {
     for (let key in appData.expenses) {
-      appData.expensesMonth += appData.expenses[key];
+      appData.expensesMonth += +appData.expenses[key];
     }
   },
-  getBudgetDay: () => {
-    appData.budgetDay = Math.floor(appData.getBudget() / 30);
+  getBudget: () => {
+    appData.budgetMonth = appData.budget - appData.expensesMonth;
+    appData.budgetDay = Math.floor(appData.budgetMonth / 30);
   },
-  getBudget: () => (appData.budget - appData.expensesMonth),
-  getTargetMonth: () => {
-    let result = (appData.mission - (appData.period * appData.getBudget())) / appData.getBudget();
+  getTargetMonth: () => appData.mission / appData.budgetMonth
 
-    if (result > 0) {
-      console.log('Цель будет достигнута');
-    } else if (result < 0) {
-      console.log('Цель не будет достигнута');
-    }
-    return result;
-  },
+  // if (result > 0) {
+  //   console.log('Цель будет достигнута');
+  // } else if (result < 0) {
+  //   console.log('Цель не будет достигнута');
+  // }
+  // return result;
+  ,
   getStatusIncome: param => {
     if (param > 1200) {
-      console.log('У вас высокий уровень дохода');
+      return ('У вас высокий уровень дохода');
     } else if (param > 600 && param < 1200) {
-      console.log('У вас средний уровень дохода');
+      return ('У вас средний уровень дохода');
     } else if (param < 600 && param > 0) {
-      console.log('К сожалению у вас уровень дохода ниже среднего');
+      return ('К сожалению у вас уровень дохода ниже среднего');
     } else if (param > -1) {
-      console.log('Что то пошло не так');
+      return ('Что то пошло не так');
     }
   },
   asking: () => {
-    let addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую:');
-    appData.addExpenses = addExpenses.toLocaleLowerCase().split(', ');
-    appData.deposit = confirm('Есть ли у вас депозит в банке? Да / нет');
-    for (let i = 0; i < 2; i++) {
-      appData.expenses[prompt('Введите обязательную статью расходов?')] = +prompt('Во сколько это обойдется?');
+
+    if (confirm('Если ли у вас дополнительный источник заработка?')) {
+      let itemIncome = prompt('Какой у вас дополнительный заработок?', 'Таксую');
+      let cashIncome = prompt('Сколько в месяц вы на этом зарабатываете?', 10000);
+      appData.income[itemIncome] = cashIncome;
     }
-    return;
-  }
+
+    let addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую.');
+    appData.addExpenses = addExpenses.toLowerCase().split(',');
+    appData.deposit = confirm('Есть ли у вас депозит в банке?');
+    for (let i = 0; i < 2; i++) {
+
+      let itemExpenses = prompt('Введите обязательную статью расходов?')
+      let cashExpenses;
+      do {
+        cashExpenses = prompt('Во сколько это обойдется?');
+      } 
+      while (isNaN(cashExpenses) || cashExpenses === '' || cashExpenses === null);
+
+      appData.expenses[itemExpenses] = cashExpenses;
+    }
+  },
+  getInfoDeposit: () => {
+    if (appData.deposit) {
+      appData.percentDeposit = prompt('Какой годовой процент?', '10');
+      appData.moneyDeposit = prompt('Какая сумма заложена?', 10000);
+    }
+  },
+  calcSavedMoney: () => appData.budgetMonth * appData.period
 };
 
 start();
 appData.asking();
 appData.getExpensesMonth();
 appData.getBudget();
-appData.getBudgetDay();
 appData.getStatusIncome(appData.budgetDay);
 
 const abc = () => {
@@ -82,3 +103,6 @@ const abc = () => {
 abc();
 console.log('Расходы за месяц: ', appData.expensesMonth);
 console.log('Сколько месяцев осталось до цели:', appData.getTargetMonth());
+
+appData.getInfoDeposit();
+console.log(appData.percentDeposit, appData.moneyDeposit, appData.calcSavedMoney());
