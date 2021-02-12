@@ -11,6 +11,7 @@ const start = () => {
   }
 };
 
+
 let appData = {
   budget: money,
   income: {},
@@ -33,15 +34,7 @@ let appData = {
     appData.budgetMonth = appData.budget - appData.expensesMonth;
     appData.budgetDay = Math.floor(appData.budgetMonth / 30);
   },
-  getTargetMonth: () => appData.mission / appData.budgetMonth
-
-  // if (result > 0) {
-  //   console.log('Цель будет достигнута');
-  // } else if (result < 0) {
-  //   console.log('Цель не будет достигнута');
-  // }
-  // return result;
-  ,
+  getTargetMonth: () => appData.mission / appData.budgetMonth,
   getStatusIncome: param => {
     if (param > 1200) {
       return ('У вас высокий уровень дохода');
@@ -56,30 +49,55 @@ let appData = {
   asking: () => {
 
     if (confirm('Если ли у вас дополнительный источник заработка?')) {
-      let itemIncome = prompt('Какой у вас дополнительный заработок?', 'Таксую');
-      let cashIncome = prompt('Сколько в месяц вы на этом зарабатываете?', 10000);
+      let itemIncome;
+      let cashIncome;
+
+      do {
+        itemIncome = prompt('Какой у вас дополнительный заработок?', 'Таксую');
+      }
+      while (!isNaN(itemIncome) || itemIncome !== itemIncome.trim() || itemIncome === null || itemIncome === '');
+
+      do {
+        cashIncome = prompt('Сколько в месяц вы на этом зарабатываете?', 15000);
+      }
+      while (isNaN(cashIncome) || cashIncome === '' || cashIncome === null || cashIncome !== cashIncome.trim());
+
       appData.income[itemIncome] = cashIncome;
     }
-
+/* ==================================================================================================== */
     let addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую.');
-    appData.addExpenses = addExpenses.toLowerCase().split(',');
+    appData.addExpenses = addExpenses.toLowerCase().split(', ');
     appData.deposit = confirm('Есть ли у вас депозит в банке?');
-    for (let i = 0; i < 2; i++) {
 
-      let itemExpenses = prompt('Введите обязательную статью расходов?')
+    for (let i = 0; i < 2; i++) {
+      let itemExpenses;
       let cashExpenses;
+
+      do {
+        itemExpenses = prompt('Введите обязательную статью расходов?');
+      }
+      while (!isNaN(itemExpenses) || itemExpenses !== itemExpenses.trim() || itemExpenses === null || itemExpenses === '');
+
       do {
         cashExpenses = prompt('Во сколько это обойдется?');
-      } 
-      while (isNaN(cashExpenses) || cashExpenses === '' || cashExpenses === null);
+      }
+      while (isNaN(cashExpenses) || cashExpenses === '' || cashExpenses === null || cashExpenses !== cashExpenses.trim());
 
       appData.expenses[itemExpenses] = cashExpenses;
     }
   },
   getInfoDeposit: () => {
     if (appData.deposit) {
-      appData.percentDeposit = prompt('Какой годовой процент?', '10');
-      appData.moneyDeposit = prompt('Какая сумма заложена?', 10000);
+
+      do {
+        appData.percentDeposit = prompt('Какой годовой процент?', 10);
+      }
+      while (isNaN(appData.percentDeposit) || appData.percentDeposit === '' || appData.percentDeposit === null || appData.percentDeposit !== appData.percentDeposit.trim());
+
+      do {
+        appData.moneyDeposit = prompt('Какая сумма заложена?', 12000);
+      }
+      while (isNaN(appData.moneyDeposit) || appData.moneyDeposit !== appData.moneyDeposit.trim() || appData.moneyDeposit === null || appData.moneyDeposit === '');
     }
   },
   calcSavedMoney: () => appData.budgetMonth * appData.period
@@ -91,18 +109,6 @@ appData.getExpensesMonth();
 appData.getBudget();
 appData.getStatusIncome(appData.budgetDay);
 
-const abc = () => {
-  console.log('Наша программа включает в себя данные: ');
-  for (let key in appData) {
-    console.log(`
-    Свойства: ${key}
-    Значение: ${appData[key]}
-  `);
-  }
-}
-abc();
 console.log('Расходы за месяц: ', appData.expensesMonth);
 console.log('Сколько месяцев осталось до цели:', appData.getTargetMonth());
-
-appData.getInfoDeposit();
-console.log(appData.percentDeposit, appData.moneyDeposit, appData.calcSavedMoney());
+console.log(appData.addExpenses);
