@@ -66,9 +66,9 @@ let appData = {
     }
     /* ==================================================================================================== */
     let addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую.');
-    appData.addExpenses = addExpenses; // тут доделать
+    appData.addExpenses = addExpenses.slice(0, 1).slice(', ').toUpperCase() + addExpenses.slice(1);
+    /* ==================================================================================================== */
     appData.deposit = confirm('Есть ли у вас депозит в банке?');
-
     for (let i = 0; i < 2; i++) {
       let itemExpenses;
       let cashExpenses;
@@ -85,9 +85,6 @@ let appData = {
 
       appData.expenses[itemExpenses] = cashExpenses;
     }
-  },
-  getExpenses: () => { //новый метод
-    this.addExpenses = this.addExpenses.map(param => param.toLowerCase().trim().slice(0, 1).toUpperCase() + param.slice(1));
   },
   getInfoDeposit: () => {
     if (appData.deposit) {
@@ -111,7 +108,6 @@ appData.asking();
 appData.getExpensesMonth();
 appData.getBudget();
 appData.getStatusIncome(appData.budgetDay);
-appData.getExpenses();
 
 console.log('Расходы за месяц: ', appData.expensesMonth);
 console.log('Сколько месяцев осталось до цели:', appData.getTargetMonth());
