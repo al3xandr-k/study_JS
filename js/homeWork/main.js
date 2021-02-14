@@ -88,9 +88,8 @@ let appData = {
       appData.expenses[itemExpenses] = cashExpenses;
     }
   },
-  // getAddExpenses: function () {
-  //   this.addExpenses = this.addExpenses.split(', ').map(item => item.toLowerCase().trim().slice(0, 1).toUpperCase() + item.toLowerCase().slice(1));
-  //   return this.addExpenses.join(', ');
+  // getAddExpenses: (param) {
+  //   appData.addExpenses = param.split(', ').map(item => item.toLowerCase().trim().slice(0, 1).toUpperCase() + item.toLowerCase().slice(1));
   // },
   getInfoDeposit: () => {
     if (appData.deposit) {
