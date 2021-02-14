@@ -63,11 +63,13 @@ let appData = {
       while (isNaN(cashIncome) || cashIncome === '' || cashIncome === null || cashIncome !== cashIncome.trim());
 
       appData.income[itemIncome] = cashIncome;
-    }
-    /* ==================================================================================================== */
+    };
+
     let addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую.');
-    appData.addExpenses = addExpenses.slice(0, 1).slice(', ').toUpperCase() + addExpenses.slice(1);
-    /* ==================================================================================================== */
+    appData.addExpenses = addExpenses;
+    appData.addExpenses = appData.addExpenses.split(', ').map(item =>
+      item.toLowerCase().slice(0, 1).toUpperCase() + item.toLowerCase().slice(1)
+    );
     appData.deposit = confirm('Есть ли у вас депозит в банке?');
     for (let i = 0; i < 2; i++) {
       let itemExpenses;
@@ -86,6 +88,10 @@ let appData = {
       appData.expenses[itemExpenses] = cashExpenses;
     }
   },
+  // getAddExpenses: function () {
+  //   this.addExpenses = this.addExpenses.split(', ').map(item => item.toLowerCase().trim().slice(0, 1).toUpperCase() + item.toLowerCase().slice(1));
+  //   return this.addExpenses.join(', ');
+  // },
   getInfoDeposit: () => {
     if (appData.deposit) {
 
