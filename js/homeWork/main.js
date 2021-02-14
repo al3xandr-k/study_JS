@@ -66,8 +66,7 @@ let appData = {
     };
 
     let addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую.');
-    appData.addExpenses = addExpenses;
-    appData.addExpenses = appData.addExpenses.split(', ').map(item =>
+    appData.addExpenses = addExpenses.split(', ').map(item =>
       item.toLowerCase().slice(0, 1).toUpperCase() + item.toLowerCase().slice(1)
     );
     appData.deposit = confirm('Есть ли у вас депозит в банке?');
@@ -88,9 +87,6 @@ let appData = {
       appData.expenses[itemExpenses] = cashExpenses;
     }
   },
-  // getAddExpenses: (param) {
-  //   appData.addExpenses = param.split(', ').map(item => item.toLowerCase().trim().slice(0, 1).toUpperCase() + item.toLowerCase().slice(1));
-  // },
   getInfoDeposit: () => {
     if (appData.deposit) {
 
