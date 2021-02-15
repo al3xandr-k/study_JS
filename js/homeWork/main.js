@@ -2,52 +2,28 @@
 
 let money;
 const controlButton = document.getElementById('start');
-console.log('controlButton: ', controlButton);
 const incomeAddButton = document.getElementsByTagName('button')[0];
-console.log('incomeAddButton: ', incomeAddButton);
 const expensesAddButton = document.getElementsByTagName('button')[1];
-console.log('expensesAddButton: ', expensesAddButton);
 const depositCheckBox = document.querySelector('#deposit-check');
-console.log('depositCheckBox: ', depositCheckBox);
 const additionalIncomeItem = document.querySelectorAll('.additional_income-item');
-console.log('additionalIncomeItem: ', additionalIncomeItem);
 const budgetMonthValue = document.getElementsByClassName('budget_month-value');
-console.log('budgetMonthValue: ', budgetMonthValue);
 const budgetDayValue = document.getElementsByClassName('budget_day-value');
-console.log('budgetDayValue: ', budgetDayValue);
 const expensesMonthValue = document.getElementsByClassName('expenses_month-value');
-console.log('expensesMonthValue: ', expensesMonthValue);
 const additionalIncomeValue = document.getElementsByClassName('additional_income-value');
-console.log('additionalIncomeValue: ', additionalIncomeValue);
 const additionalExpensesValue = document.getElementsByClassName('additional_expenses-value');
-console.log('additionalExpensesValue: ', additionalExpensesValue);
 const incomePeriodValue = document.getElementsByClassName('income_period-value');
-console.log('incomePeriodValue: ', incomePeriodValue);
 const targetMonthValue = document.getElementsByClassName('target_month-value');
-console.log('targetMonthValue: ', targetMonthValue);
 const salaryMonth = document.querySelector('.salary-amount');
-console.log('salaryMonth: ', salaryMonth);
-//const incomeTitleClassName = document.getElementsByClassName('income-title')
 const incomeTitle = document.querySelector('.income-items > .income-title');
-console.log('incomeTitle: ', incomeTitle);
 const incomeAmount = document.querySelector('.income-amount');
-console.log('incomeAmount: ', incomeAmount);
 const expensesTitle = document.querySelector('.expenses-items > .expenses-title');
-console.log('expensesTitle: ', expensesTitle);
 const expensesAmount = document.querySelector('.expenses-amount');
-console.log('expensesAmount: ', expensesAmount);
 const additionalExpensesItem = document.querySelector('.additional_expenses-item');
-console.log('additionalExpensesItem: ', additionalExpensesItem);
 const depositCheckMark = document.querySelector('#deposit-check');
-console.log('depositCheckMark: ', depositCheckMark);
 const targetAmount = document.querySelector('.target-amount');
-console.log('targetAmount: ', targetAmount);
 const periodSelect = document.querySelector('.period-select');
-console.log('periodSelect: ', periodSelect);
 const periodAmount = document.querySelector('.period-amount');
-console.log('periodAmount: ', periodAmount);
 const cancelButton = document.querySelector('#cancel');
-console.log('cancelButton: ', cancelButton);
 
 
 const isNumber = n => !isNaN(parseFloat(n)) && isFinite(n);
