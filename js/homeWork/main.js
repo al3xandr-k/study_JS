@@ -108,7 +108,7 @@ let appData = {
       }
       while (isNaN(cashExpenses) || cashExpenses === '' || cashExpenses === null || cashExpenses !== cashExpenses.trim());
 
-      appData.expenses[itemExpenses] = cashExpenses;
+      appData.expenses[itemExpenses] = +cashExpenses;
     }
   },
   getInfoDeposit: () => {
