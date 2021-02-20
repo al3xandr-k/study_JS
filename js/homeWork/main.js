@@ -43,13 +43,6 @@ let appData = {
   percentDeposit: 0,
   moneyDeposit: 0,
   start: () => {
-
-    if (salaryAmonth.value === '') {
-      alert('Ошибка, строка пустая. Заполните месячный доход.');
-      return;
-    }
-    appData.budget = +salaryAmonth.value;
-
     appData.getExpenses();
     appData.getIncome();
     appData.getExpensesMonth();
@@ -67,8 +60,10 @@ let appData = {
     targetMonthValue.value = Math.ceil(appData.getTargetMonth());
     incomePeriodValue.value = appData.calcSavedMoney();
   },
+  periodAmount: () => {
+    periodAmount.innerHTML = periodSelect.value;
+  },
   addExpensesBlock: () => {
-
     let cloneExpensesItem = expensesItems[0].cloneNode(true);
 
     expensesItems[0].parentNode.insertBefore(cloneExpensesItem, expensesAddButton);
@@ -96,10 +91,6 @@ let appData = {
       if (itemExpenses !== '' && cashExpenses !== '') {
         appData.expenses[itemExpenses] = +cashExpenses;
       }
-
-      for (let key in appData.expenses) {
-        appData.expensesMonth += +appData.expenses[key];
-      }
     })
   },
   getIncome: () => {
@@ -111,11 +102,22 @@ let appData = {
       }
     })
 
-    for (let key in appData.income){
+    for (let key in appData.income) {
       appData.incomeMonth += +appData.income[key];
     }
   },
+  getExpensesMonth: () => {
+    for (let key in appData.expenses) {
+      appData.expensesMonth += +appData.expenses[key];
+    }
+  },
   getBudget: () => {
+    if (salaryAmonth.value === '') {
+      alert('Ошибка, строка пустая. Заполните месячный доход.');
+      return;
+    }
+
+    appData.budget = +salaryAmonth.value;
     appData.budgetMonth = appData.budget + appData.incomeMonth - appData.expensesMonth;
     appData.budgetDay = Math.floor(appData.budgetMonth / 30);
   },
@@ -143,7 +145,7 @@ let appData = {
   getAddIncome: () => {
     additionalIncomeItem.forEach((item) => {
       let itemValue = item.value.trim();
-      if(itemValue !== '') {
+      if (itemValue !== '') {
         appData.addIncome.push(itemValue);
       }
     })
@@ -165,7 +167,7 @@ let appData = {
   calcSavedMoney: () => appData.budgetMonth * periodSelect.value
 };
 
-
 controlButton.addEventListener('click', appData.start);
 expensesAddButton.addEventListener('click', appData.addExpensesBlock);
 incomeAddButton.addEventListener('click', appData.addIncomeBlock);
+periodSelect.addEventListener('input', appData.periodAmount);
