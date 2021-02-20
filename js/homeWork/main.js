@@ -45,7 +45,6 @@ let appData = {
   start: () => {
     appData.getExpenses();
     appData.getIncome();
-    appData.getExpensesMonth();
     appData.getAddExpenses();
     appData.getAddIncome();
     appData.getBudget();
@@ -92,6 +91,10 @@ let appData = {
         appData.expenses[itemExpenses] = +cashExpenses;
       }
     })
+
+    for (let key in appData.expenses) {
+      appData.expensesMonth += +appData.expenses[key];
+    }
   },
   getIncome: () => {
     incomeItems.forEach((item) => {
@@ -104,11 +107,6 @@ let appData = {
 
     for (let key in appData.income) {
       appData.incomeMonth += +appData.income[key];
-    }
-  },
-  getExpensesMonth: () => {
-    for (let key in appData.expenses) {
-      appData.expensesMonth += +appData.expenses[key];
     }
   },
   getBudget: () => {
