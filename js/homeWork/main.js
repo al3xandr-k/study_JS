@@ -13,7 +13,7 @@ const additionalIncomeValue = document.getElementsByClassName('additional_income
 const additionalExpensesValue = document.getElementsByClassName('additional_expenses-value')[0];
 const incomePeriodValue = document.getElementsByClassName('income_period-value')[0];
 const targetMonthValue = document.getElementsByClassName('target_month-value')[0];
-const salaryAmonth = document.querySelector('.salary-amount');
+const salaryAmount = document.querySelector('.salary-amount');
 const incomeTitle = document.querySelector('.income-items > .income-title');
 let incomeItems = document.querySelectorAll('.income-items');
 const expensesTitle = document.querySelector('.expenses-items > .expenses-title');
@@ -43,6 +43,7 @@ let appData = {
   percentDeposit: 0,
   moneyDeposit: 0,
   start: () => {
+    //debugger
     appData.getExpenses();
     appData.getIncome();
     appData.getAddExpenses();
@@ -56,7 +57,9 @@ let appData = {
     expensesMonthValue.value = appData.expensesMonth;
     additionalExpensesValue.value = appData.addExpenses.join(', ');
     additionalIncomeValue.value = appData.addIncome.join(', ');
+    //debugger
     targetMonthValue.value = Math.ceil(appData.getTargetMonth());
+
     incomePeriodValue.value = appData.calcSavedMoney();
   },
   periodAmount: () => {
@@ -84,7 +87,7 @@ let appData = {
     }
   },
   getExpenses: () => {
-    expensesItems.forEach((item) => {
+    expensesItems.forEach(item => {
       let itemExpenses = item.querySelector('.expenses-title').value;
       let cashExpenses = item.querySelector('.expenses-amount').value;
       if (itemExpenses !== '' && cashExpenses !== '') {
@@ -97,7 +100,7 @@ let appData = {
     }
   },
   getIncome: () => {
-    incomeItems.forEach((item) => {
+    incomeItems.forEach(item => {
       let itemIncome = item.querySelector('.income-title').value;
       let cashIncome = item.querySelector('.income-amount').value;
       if (itemIncome !== '' && cashIncome !== '') {
@@ -110,16 +113,33 @@ let appData = {
     }
   },
   getBudget: () => {
-    if (salaryAmonth.value === '') {
+    if (salaryAmount.value === '') {
       alert('Ошибка, строка пустая. Заполните месячный доход.');
       return;
     }
 
-    appData.budget = +salaryAmonth.value;
+    appData.budget = +salaryAmount.value;
     appData.budgetMonth = appData.budget + appData.incomeMonth - appData.expensesMonth;
     appData.budgetDay = Math.floor(appData.budgetMonth / 30);
   },
-  getTargetMonth: () => targetAmount.value / appData.budgetMonth,
+  getTargetMonth: () => {
+
+
+
+    if (targetAmount.value === '') {
+
+    }
+
+
+
+
+    return targetAmount.value / appData.budgetMonth;
+
+
+
+
+
+  },
   getStatusIncome: param => {
     if (param > 1200) {
       return ('У вас высокий уровень дохода');
@@ -141,7 +161,7 @@ let appData = {
     })
   },
   getAddIncome: () => {
-    additionalIncomeItem.forEach((item) => {
+    additionalIncomeItem.forEach(item => {
       let itemValue = item.value.trim();
       if (itemValue !== '') {
         appData.addIncome.push(itemValue);
