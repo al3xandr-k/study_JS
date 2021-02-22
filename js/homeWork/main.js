@@ -31,6 +31,7 @@ const isNumber = n => !isNaN(parseFloat(n)) && isFinite(n);
 
 let appData = {
   budget: 0,
+  targetAmount: 0,
   budgetDay: 0,
   budgetMonth: 0,
   income: {},
@@ -43,7 +44,6 @@ let appData = {
   percentDeposit: 0,
   moneyDeposit: 0,
   start: () => {
-    //debugger
     appData.getExpenses();
     appData.getIncome();
     appData.getAddExpenses();
@@ -57,10 +57,11 @@ let appData = {
     expensesMonthValue.value = appData.expensesMonth;
     additionalExpensesValue.value = appData.addExpenses.join(', ');
     additionalIncomeValue.value = appData.addIncome.join(', ');
-    //debugger
     targetMonthValue.value = Math.ceil(appData.getTargetMonth());
-
     incomePeriodValue.value = appData.calcSavedMoney();
+  },
+  incomePeriod: () => {
+    incomePeriodValue.value = appData.budgetMonth * periodSelect.value;
   },
   periodAmount: () => {
     periodAmount.innerHTML = periodSelect.value;
@@ -124,16 +125,16 @@ let appData = {
   },
   getTargetMonth: () => {
 
-
+    
 
     if (targetAmount.value === '') {
-
+      return targetMonthValue.value = targetAmount.value;
+    } else if (targetAmount.value === 0) {
+      targetAmount.value = +targetAmount.value;
+    } else {
+      return targetAmount.value / appData.budgetMonth;
     }
-
-
-
-
-    return targetAmount.value / appData.budgetMonth;
+    
 
 
 
@@ -189,3 +190,6 @@ controlButton.addEventListener('click', appData.start);
 expensesAddButton.addEventListener('click', appData.addExpensesBlock);
 incomeAddButton.addEventListener('click', appData.addIncomeBlock);
 periodSelect.addEventListener('input', appData.periodAmount);
+periodSelect.addEventListener('input', appData.incomePeriod);
+
+console.log(typeof targetAmount.value);
