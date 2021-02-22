@@ -124,22 +124,11 @@ let appData = {
     appData.budgetDay = Math.floor(appData.budgetMonth / 30);
   },
   getTargetMonth: () => {
-
-    
-
     if (targetAmount.value === '') {
       return targetMonthValue.value = targetAmount.value;
-    } else if (targetAmount.value === 0) {
-      targetAmount.value = +targetAmount.value;
     } else {
       return targetAmount.value / appData.budgetMonth;
     }
-    
-
-
-
-
-
   },
   getStatusIncome: param => {
     if (param > 1200) {
