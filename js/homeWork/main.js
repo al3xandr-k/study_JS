@@ -43,7 +43,7 @@ let appData = {
   deposit: false,
   percentDeposit: 0,
   moneyDeposit: 0,
-  start: () => {
+  start: function () {
     appData.getExpenses();
     appData.getIncome();
     appData.getAddExpenses();
@@ -51,22 +51,25 @@ let appData = {
     appData.getBudget();
     appData.showResult();
   },
-  showResult: () => {
-    budgetDayValue.value = Math.ceil(appData.budgetDay);
-    budgetMonthValue.value = appData.budgetMonth;
-    expensesMonthValue.value = appData.expensesMonth;
-    additionalExpensesValue.value = appData.addExpenses.join(', ');
-    additionalIncomeValue.value = appData.addIncome.join(', ');
+  reset: function () {
+    
+  },
+  showResult: function () {
+    budgetDayValue.value = Math.ceil(this.budgetDay);
+    budgetMonthValue.value = this.budgetMonth;
+    expensesMonthValue.value = this.expensesMonth;
+    additionalExpensesValue.value = this.addExpenses.join(', ');
+    additionalIncomeValue.value = this.addIncome.join(', ');
     targetMonthValue.value = Math.ceil(appData.getTargetMonth());
     incomePeriodValue.value = appData.calcSavedMoney();
   },
-  incomePeriod: () => {
+  incomePeriod: function () {
     incomePeriodValue.value = appData.budgetMonth * periodSelect.value;
   },
-  periodAmount: () => {
+  periodAmount: function () {
     periodAmount.innerHTML = periodSelect.value;
   },
-  addExpensesBlock: () => {
+  addExpensesBlock: function () {
     let cloneExpensesItem = expensesItems[0].cloneNode(true);
 
     expensesItems[0].parentNode.insertBefore(cloneExpensesItem, expensesAddButton);
@@ -77,7 +80,7 @@ let appData = {
     }
 
   },
-  addIncomeBlock: () => {
+  addIncomeBlock: function () {
     let cloneIncomesItem = incomeItems[0].cloneNode(true);
 
     incomeItems[0].parentNode.insertBefore(cloneIncomesItem, incomeAddButton);
@@ -87,7 +90,7 @@ let appData = {
       incomeAddButton.style.display = 'none';
     }
   },
-  getExpenses: () => {
+  getExpenses: function () {
     expensesItems.forEach(item => {
       let itemExpenses = item.querySelector('.expenses-title').value;
       let cashExpenses = item.querySelector('.expenses-amount').value;
@@ -96,11 +99,11 @@ let appData = {
       }
     })
 
-    for (let key in appData.expenses) {
-      appData.expensesMonth += +appData.expenses[key];
+    for (let key in this.expenses) {
+      this.expensesMonth += +this.expenses[key];
     }
   },
-  getIncome: () => {
+  getIncome: function () {
     incomeItems.forEach(item => {
       let itemIncome = item.querySelector('.income-title').value;
       let cashIncome = item.querySelector('.income-amount').value;
@@ -109,28 +112,28 @@ let appData = {
       }
     })
 
-    for (let key in appData.income) {
-      appData.incomeMonth += +appData.income[key];
+    for (let key in this.income) {
+      this.incomeMonth += +this.income[key];
     }
   },
-  getBudget: () => {
+  getBudget: function () {
     if (salaryAmount.value === '') {
       alert('Ошибка, строка пустая. Заполните месячный доход.');
       return;
     }
 
     appData.budget = +salaryAmount.value;
-    appData.budgetMonth = appData.budget + appData.incomeMonth - appData.expensesMonth;
-    appData.budgetDay = Math.floor(appData.budgetMonth / 30);
+    appData.budgetMonth = this.budget + this.incomeMonth - this.expensesMonth;
+    appData.budgetDay = Math.floor(this.budgetMonth / 30);
   },
-  getTargetMonth: () => {
+  getTargetMonth: function () {
     if (targetAmount.value === '') {
       return targetMonthValue.value = targetAmount.value;
     } else {
-      return targetAmount.value / appData.budgetMonth;
+      return targetAmount.value / this.budgetMonth;
     }
   },
-  getStatusIncome: param => {
+  getStatusIncome: function (param) {
     if (param > 1200) {
       return ('У вас высокий уровень дохода');
     } else if (param > 600 && param < 1200) {
@@ -141,44 +144,45 @@ let appData = {
       return ('Что то пошло не так');
     }
   },
-  getAddExpenses: () => {
+  getAddExpenses: function () {
     let addExpenses = additionalExpensesItem.value.split(',');
     addExpenses.forEach(item => {
       item = item.trim().slice(0, 1).toUpperCase() + item.trim().slice(1).toLowerCase();
       if (item !== '') {
-        appData.addExpenses.push(item);
+        this.addExpenses.push(item);
       }
     })
   },
-  getAddIncome: () => {
+  getAddIncome: function () {
     additionalIncomeItem.forEach(item => {
       let itemValue = item.value.trim();
       if (itemValue !== '') {
-        appData.addIncome.push(itemValue);
+        this.addIncome.push(itemValue);
       }
     })
   },
-  getInfoDeposit: () => {
-    if (appData.deposit) {
+  getInfoDeposit: function () {
+    if (this.deposit) {
 
       do {
         appData.percentDeposit = prompt('Какой годовой процент?', 10);
       }
-      while (isNaN(appData.percentDeposit) || appData.percentDeposit === '' || appData.percentDeposit === null || appData.percentDeposit !== appData.percentDeposit.trim());
+      while (isNaN(this.percentDeposit) || this.percentDeposit === '' || this.percentDeposit === null || this.percentDeposit !== this.percentDeposit.trim());
 
       do {
         appData.moneyDeposit = prompt('Какая сумма заложена?', 12000);
       }
-      while (isNaN(appData.moneyDeposit) || appData.moneyDeposit !== appData.moneyDeposit.trim() || appData.moneyDeposit === null || appData.moneyDeposit === '');
+      while (isNaN(this.moneyDeposit) || this.moneyDeposit !== this.moneyDeposit.trim() || this.moneyDeposit === null || this.moneyDeposit === '');
     }
   },
-  calcSavedMoney: () => appData.budgetMonth * periodSelect.value
+  calcSavedMoney: function () { 
+    return this.budgetMonth * periodSelect.value 
+  }
 };
 
 controlButton.addEventListener('click', appData.start);
+cancelButton.addEventListener('click', appData.reset);
 expensesAddButton.addEventListener('click', appData.addExpensesBlock);
 incomeAddButton.addEventListener('click', appData.addIncomeBlock);
 periodSelect.addEventListener('input', appData.periodAmount);
 periodSelect.addEventListener('input', appData.incomePeriod);
-
-console.log(typeof targetAmount.value);
