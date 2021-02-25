@@ -146,6 +146,7 @@ let appData = {
   },
   getAddExpenses: function () {
     let addExpenses = additionalExpensesItem.value.split(',');
+
     addExpenses.forEach(item => {
       item = item.trim().slice(0, 1).toUpperCase() + item.trim().slice(1).toLowerCase();
       if (item !== '') {
@@ -155,7 +156,8 @@ let appData = {
   },
   getAddIncome: function () {
     additionalIncomeItem.forEach(item => {
-      let itemValue = item.value.trim();
+      let itemValue = item.value.trim().charAt(0).toUpperCase() + item.value.trim().substr(1).toLowerCase();
+
       if (itemValue !== '') {
         this.addIncome.push(itemValue);
       }
