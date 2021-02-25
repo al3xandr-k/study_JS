@@ -1,6 +1,5 @@
 'use strict';
 
-
 const controlButton = document.getElementById('start');
 const incomeAddButton = document.getElementsByTagName('button')[0];
 const expensesAddButton = document.getElementsByTagName('button')[1];
@@ -25,9 +24,7 @@ const periodSelect = document.querySelector('.period-select');
 const periodAmount = document.querySelector('.period-amount');
 const cancelButton = document.querySelector('#cancel');
 
-
 const isNumber = n => !isNaN(parseFloat(n)) && isFinite(n);
-
 
 let appData = {
   budget: 0,
@@ -44,6 +41,8 @@ let appData = {
   percentDeposit: 0,
   moneyDeposit: 0,
   start: function () {
+    controlButton.style.display = 'none';
+    cancelButton.style.display = 'block';
     appData.getExpenses();
     appData.getIncome();
     appData.getAddExpenses();
@@ -52,7 +51,9 @@ let appData = {
     appData.showResult();
   },
   reset: function () {
-    
+    if (cancelButton.style.display === 'block') {
+      window.location.href = 'index.html';
+    }
   },
   showResult: function () {
     budgetDayValue.value = Math.ceil(this.budgetDay);
@@ -78,7 +79,6 @@ let appData = {
     if (expensesItems.length === 3) {
       expensesAddButton.style.display = 'none';
     }
-
   },
   addIncomeBlock: function () {
     let cloneIncomesItem = incomeItems[0].cloneNode(true);
@@ -175,8 +175,8 @@ let appData = {
       while (isNaN(this.moneyDeposit) || this.moneyDeposit !== this.moneyDeposit.trim() || this.moneyDeposit === null || this.moneyDeposit === '');
     }
   },
-  calcSavedMoney: function () { 
-    return this.budgetMonth * periodSelect.value 
+  calcSavedMoney: function () {
+    return this.budgetMonth * periodSelect.value
   }
 };
 
