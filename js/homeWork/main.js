@@ -43,7 +43,6 @@ let appData = {
   percentDeposit: 0,
   moneyDeposit: 0,
   start: function () {
-
     this.getExpenses();
     this.getIncome();
     this.getAddExpenses();
@@ -54,7 +53,32 @@ let appData = {
     cancelButton.style.display = 'block';
   },
   reset: function () {
+    const that = this;
+    if (cancelButton) {
+      that.budget = 0,
+      that.targetAmount = 0,
+      that.budgetDay = 0,
+      that.budgetMonth = 0,
+      that.income = {},
+      that.incomeMonth = 0,
+      that.addIncome = [],
+      that.expenses = {},
+      that.expensesMonth = 0,
+      that.addExpenses = [],
+      that.deposit = false,
+      that.ercentDeposit = 0,
+      that.moneyDeposit = 0,
 
+      salaryAmount.value = '';
+      incomeTitle.value = '';
+      cashIncome.value = '';
+      additionalIncomeItem[0].value = '';
+      additionalIncomeItem[1].value = '';
+      expensesTitle.value = '';
+      cashExpenses.value = '';
+      additionalExpensesItem.value = '';
+      targetAmount.value = '';
+    }
   },
   showResult: function () {
     budgetDayValue.value = Math.ceil(this.budgetDay);
@@ -197,4 +221,6 @@ expensesAddButton.addEventListener('click', appData.addExpensesBlock);
 incomeAddButton.addEventListener('click', appData.addIncomeBlock);
 periodSelect.addEventListener('input', appData.periodAmount);
 periodSelect.addEventListener('input', appData.incomePeriod);
-cancelButton.addEventListener('click', appData.reset);
+cancelButton.addEventListener('click', function () {
+  appData.reset();
+});
