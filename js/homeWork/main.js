@@ -104,9 +104,9 @@ let appData = {
     expensesTitle.value = '';
     cashExpenses.value = '';
 
-    // if (expensesItems.length === 3) {
-    //   expensesAddButton.style.display = 'none';
-    // }
+    if (expensesItems.length === 3) {
+      expensesAddButton.style.display = 'none';
+    }
   },
   addIncomeBlock: function () {
     let cloneIncomesItem = incomeItems[0].cloneNode(true);
@@ -117,9 +117,9 @@ let appData = {
     incomeTitle.value = '';
     cashIncome.value = '';
 
-    // if (incomeItems.length === 3) {
-    //   incomeAddButton.style.display = 'none';
-    // }
+    if (incomeItems.length === 3) {
+      incomeAddButton.style.display = 'none';
+    }
   },
   getExpenses: function () {
 
