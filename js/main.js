@@ -10,22 +10,33 @@ class DomElement {
     this.fontSize = fontSize;
   }
 
-  addElement(selector) {
+  addElement(selector, height) {
     const addDivElement = document.createElement('div');
     const addParagraphElement = document.createElement('p');
+    const pStyle = document.querySelector(selector);
+    const divStyle = document.querySelector(selector);
+    console.log('selector: ', selector);
+    console.log('pStyle: ', pStyle);
 
-    if (selector.indexOf('.', 1)) {
+    if (selector.includes('.')) {
       wrapper.append(addDivElement);
-      addDivElement.setAttribute('class', 'addCLassDivElement');
-    } else if (selector.indexOf('#', 1)) {
+      addDivElement.setAttribute('class', selector.split('').slice(1).join(''));
+      divStyle.style.height = height;
+
+    } else if (selector.includes('#')) {
       wrapper.append(addParagraphElement);
-      addParagraphElement.setAttribute('id', 'addParagraphIdElement');
+      addParagraphElement.setAttribute('id', selector.split('').slice(1).join(''));
+      pStyle.style.height = height;
     }
-  }
+  };
 };
 
 const domElement = new DomElement();
-// - если строка selector начинается с точки, создаем div с классом
-// - если строка selector  начинается с решетки # то создаем параграф с id
 
-console.log(domElement.addElement('.'));
+domElement.addElement('#best', '100px');
+
+
+// - высотой - height,
+// - шириной - width, 
+// - background - bg
+// - размер текста fontSize 
