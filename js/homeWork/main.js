@@ -269,14 +269,6 @@ class AppData {
   };
 };
 
-
-
-
-
-
-
-
-
 const appData = new AppData();
 console.log('appData: ', appData);
 
