@@ -1,5 +1,13 @@
 const wrapper = document.querySelector('.wrapper');
 
+wrapper.style.fontWeight = 'bold';
+wrapper.style.display = 'flex';
+wrapper.style.flexDirection = 'column';
+wrapper.style.alignItems = 'center';
+wrapper.style.alignItem = 'center';
+wrapper.style.textAlign = 'center';
+wrapper.style.margin = '50px';
+
 class DomElement {
 
   constructor(selector, height, width, bg, fontSize) {
@@ -10,33 +18,32 @@ class DomElement {
     this.fontSize = fontSize;
   }
 
-  addElement(selector, height) {
-    const addDivElement = document.createElement('div');
-    const addParagraphElement = document.createElement('p');
-    const pStyle = document.querySelector(selector);
-    const divStyle = document.querySelector(selector);
-    console.log('selector: ', selector);
-    console.log('pStyle: ', pStyle);
-
+  addElement(selector, height, width, bg, fontSize) {
     if (selector.includes('.')) {
-      wrapper.append(addDivElement);
-      addDivElement.setAttribute('class', selector.split('').slice(1).join(''));
-      divStyle.style.height = height;
+      const addDivElement = document.createElement('div');
 
+      addDivElement.setAttribute('class', selector.split('').slice(1).join(''));
+      addDivElement.style.height = height;
+      addDivElement.style.width = width;
+      addDivElement.style.background = bg;
+      addDivElement.style.fontSize = fontSize;
+      addDivElement.innerHTML = 'Я есть DIV с class\'ом';
+      wrapper.append(addDivElement);
     } else if (selector.includes('#')) {
-      wrapper.append(addParagraphElement);
+      const addParagraphElement = document.createElement('p');
+
       addParagraphElement.setAttribute('id', selector.split('').slice(1).join(''));
-      pStyle.style.height = height;
+      addParagraphElement.style.height = height;
+      addParagraphElement.style.width = width;
+      addParagraphElement.style.background = bg;
+      addParagraphElement.style.fontSize = fontSize;
+      addParagraphElement.innerHTML = 'Я есть P\'араграф с id\'шкой';
+      wrapper.append(addParagraphElement);
     }
+
   };
 };
 
 const domElement = new DomElement();
 
-domElement.addElement('#best', '100px');
-
-
-// - высотой - height,
-// - шириной - width, 
-// - background - bg
-// - размер текста fontSize 
+domElement.addElement('.block', '600px', '800px', 'url("https://cdn.dribbble.com/users/1224367/screenshots/6777058/glo.jpg") 100% 100%', '2rem');
