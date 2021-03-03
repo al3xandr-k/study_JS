@@ -183,7 +183,7 @@ class AppData {
   };
   getAddExpenses() {
     const _this = this;
-    let addExpenses = additionalExpensesItem.value.split(',');
+    
 
     addExpenses.forEach(item => {
       item = item.trim().slice(0, 1).toUpperCase() + item.trim().slice(1).toLowerCase();
@@ -208,7 +208,18 @@ class AppData {
   //   const _this = this;
   //   let addExpenses = additionalExpensesItem.value.split(',');
     
+  //   const getAdd = item => {
+  //     item = item.trim().slice(0, 1).toUpperCase() + item.trim().slice(1).toLowerCase();
+      
 
+
+  //     if (item !== '') {
+  //       _this.addIncome.push(item);
+  //     }
+  //   }
+
+  //   additionalIncomeItem.forEach(getAdd);
+  //   addExpenses.forEach(getAdd);
   // };
 
   getInfoDeposit() {
