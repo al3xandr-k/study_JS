@@ -204,23 +204,24 @@ class AppData {
     })
   };
 
-  // getAddIncExp() {
-  //   const _this = this;
-  //   let addExpenses = additionalExpensesItem.value.split(',');
+  getAddIncExp() {
+    const _this = this;
+    let addExpenses = additionalExpensesItem.value.split(',');
     
-  //   const getAdd = item => {
-  //     item = item.trim().slice(0, 1).toUpperCase() + item.trim().slice(1).toLowerCase();
+    const getAdd = item => {
+      
+      item = item.trim().slice(0, 1).toUpperCase() + item.trim().slice(1).toLowerCase();
       
 
 
-  //     if (item !== '') {
-  //       _this.addIncome.push(item);
-  //     }
-  //   }
+      if (item !== '') {
+        _this.addIncome.push(item);
+      }
+    }
 
-  //   additionalIncomeItem.forEach(getAdd);
-  //   addExpenses.forEach(getAdd);
-  // };
+    additionalIncomeItem.forEach(getAdd);
+    addExpenses.forEach(getAdd);
+  };
 
   getInfoDeposit() {
     const _this = this;
