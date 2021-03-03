@@ -117,9 +117,22 @@ class AppData {
     }
   };
 
+  // addBlocksExpInc() {
+  // const _this = this;
+
+  //   const addBlocks = item => {
+  //     const itemsValue = item.className.split('-')[0];
+  //     const expItems = item.querySelectorAll(`.${itemsValue}-items`);
+  //     const incItems = item.querySelectorAll(`.${itemsValue}-items`);
+
+  //     const cloneItems[0] = ;
+  //   }
+  // };
+
   getExpInc() {
+    const _this = this;
+
     const count = item => {
-      const _this = this;
       const startStr = item.className.split('-')[0];
       const itemTitle = item.querySelector(`.${startStr}-title`).value;
       const itemAmount = item.querySelector(`.${startStr}-amount`).value;
@@ -132,14 +145,13 @@ class AppData {
     for (let key in this.income) {
       this.incomeMonth += +this.income[key];
     };
-    
+
     for (let key in this.expenses) {
       this.expensesMonth += +this.expenses[key];
     }
   };
 
   getBudget() {
-
     if (salaryAmount.value === '') {
       alert('Ошибка, строка пустая. Заполните месячный доход.');
       return;
@@ -169,7 +181,6 @@ class AppData {
       return ('Что то пошло не так');
     }
   };
-
   getAddExpenses() {
     const _this = this;
     let addExpenses = additionalExpensesItem.value.split(',');
@@ -185,13 +196,20 @@ class AppData {
   getAddIncome() {
     const _this = this;
     additionalIncomeItem.forEach(item => {
-      let itemValue = item.value.trim().charAt(0).toUpperCase() + item.value.trim().substr(1).toLowerCase();
+      let itemValue = item.value.trim().slice(0, 1).toUpperCase() + item.value.trim().slice(1).toLowerCase();
 
       if (itemValue !== '') {
         _this.addIncome.push(itemValue);
       }
     })
   };
+
+  // getAddIncExp() {
+  //   const _this = this;
+  //   let addExpenses = additionalExpensesItem.value.split(',');
+    
+
+  // };
 
   getInfoDeposit() {
     const _this = this;
@@ -219,12 +237,10 @@ class AppData {
     this.targetAmount = 0;
     this.budgetDay = 0;
     this.budgetMonth = 0;
-    this.income = {
-    };
+    this.income = {};
     this.incomeMonth = 0;
     this.addIncome = [];
-    this.expenses = {
-    };
+    this.expenses = {};
     this.expensesMonth = 0;
     this.addExpenses = [];
     this.deposit = false;
