@@ -96,7 +96,7 @@ class AppData {
   };
 
   addExpensesBlock() {
-    let cloneExpensesItem = expensesItems[0].cloneNode(true);
+    const cloneExpensesItem = expensesItems[0].cloneNode(true);
 
     expensesItems[0].parentNode.insertBefore(cloneExpensesItem, expensesAddButton);
     expensesItems = document.querySelectorAll('.expenses-items');
@@ -107,7 +107,7 @@ class AppData {
   };
 
   addIncomeBlock() {
-    let cloneIncomesItem = incomeItems[0].cloneNode(true);
+    const cloneIncomesItem = incomeItems[0].cloneNode(true);
 
     incomeItems[0].parentNode.insertBefore(cloneIncomesItem, incomeAddButton);
     incomeItems = document.querySelectorAll('.income-items');
@@ -183,7 +183,8 @@ class AppData {
   };
   getAddExpenses() {
     const _this = this;
-    
+
+    const addExpenses = additionalExpensesItem.value.split(',');
 
     addExpenses.forEach(item => {
       item = item.trim().slice(0, 1).toUpperCase() + item.trim().slice(1).toLowerCase();
@@ -196,32 +197,32 @@ class AppData {
   getAddIncome() {
     const _this = this;
     additionalIncomeItem.forEach(item => {
-      let itemValue = item.value.trim().slice(0, 1).toUpperCase() + item.value.trim().slice(1).toLowerCase();
-
-      if (itemValue !== '') {
-        _this.addIncome.push(itemValue);
-      }
-    })
-  };
-
-  getAddIncExp() {
-    const _this = this;
-    let addExpenses = additionalExpensesItem.value.split(',');
-    
-    const getAdd = item => {
-      
-      item = item.trim().slice(0, 1).toUpperCase() + item.trim().slice(1).toLowerCase();
-      
-
+      item = item.value.trim().slice(0, 1).toUpperCase() + item.value.trim().slice(1).toLowerCase();
 
       if (item !== '') {
         _this.addIncome.push(item);
       }
-    }
-
-    additionalIncomeItem.forEach(getAdd);
-    addExpenses.forEach(getAdd);
+    })
   };
+
+  // getAddIncExp() {
+  //   const _this = this;
+
+
+  //   const getAdd = item => {
+
+  //     item = item.trim().slice(0, 1).toUpperCase() + item.trim().slice(1).toLowerCase();
+
+
+
+  //     if (item !== '') {
+  //       _this.addIncome.push(item);
+  //     }
+  //   }
+
+  //   additionalIncomeItem.forEach(getAdd);
+  //   addExpenses.forEach(getAdd);
+  // };
 
   getInfoDeposit() {
     const _this = this;
