@@ -43,16 +43,15 @@ class AppData {
   }
 
   eventListeners() {
-    const _this = this;
-    controlButton.addEventListener('click', function () {
-      _this.start();
+    controlButton.addEventListener('click', () => {
+      this.start();
     });
     expensesAddButton.addEventListener('click', this.addExpensesBlock);
     incomeAddButton.addEventListener('click', this.addIncomeBlock);
     periodSelect.addEventListener('input', this.periodAmount);
     periodSelect.addEventListener('input', this.incomePeriod);
-    cancelButton.addEventListener('click', function () {
-      _this.reset();
+    cancelButton.addEventListener('click', () => {
+      this.reset();
     });
   };
 
@@ -118,7 +117,6 @@ class AppData {
   };
 
   // addBlocksExpInc() {
-  // const _this = this;
 
   //   const addBlocks = item => {
   //     const itemsValue = item.className.split('-')[0];
@@ -130,13 +128,12 @@ class AppData {
   // };
 
   getExpInc() {
-    const _this = this;
 
     const count = item => {
       const startStr = item.className.split('-')[0];
       const itemTitle = item.querySelector(`.${startStr}-title`).value;
       const itemAmount = item.querySelector(`.${startStr}-amount`).value;
-      _this[startStr][itemTitle] = +itemAmount;
+      this[startStr][itemTitle] = +itemAmount;
     };
 
     expensesItems.forEach(count);
@@ -182,41 +179,33 @@ class AppData {
     }
   };
   getAddExpenses() {
-    const _this = this;
-
     const addExpenses = additionalExpensesItem.value.split(',');
 
     addExpenses.forEach(item => {
       item = item.trim().slice(0, 1).toUpperCase() + item.trim().slice(1).toLowerCase();
       if (item !== '') {
-        _this.addExpenses.push(item);
+        this.addExpenses.push(item);
       }
     })
   };
 
   getAddIncome() {
-    const _this = this;
     additionalIncomeItem.forEach(item => {
       item = item.value.trim().slice(0, 1).toUpperCase() + item.value.trim().slice(1).toLowerCase();
 
       if (item !== '') {
-        _this.addIncome.push(item);
+        this.addIncome.push(item);
       }
     })
   };
 
   // getAddIncExp() {
-  //   const _this = this;
-
 
   //   const getAdd = item => {
-
   //     item = item.trim().slice(0, 1).toUpperCase() + item.trim().slice(1).toLowerCase();
 
-
-
   //     if (item !== '') {
-  //       _this.addIncome.push(item);
+  //       this.addIncome.push(item);
   //     }
   //   }
 
@@ -225,23 +214,21 @@ class AppData {
   // };
 
   getInfoDeposit() {
-    const _this = this;
     if (this.deposit) {
 
       do {
-        _this.percentDeposit = prompt('Какой годовой процент?', 10);
+        this.percentDeposit = prompt('Какой годовой процент?', 10);
       }
-      while (isNaN(_this.percentDeposit) || _this.percentDeposit === '' || _this.percentDeposit === null || _this.percentDeposit !== _this.percentDeposit.trim());
+      while (isNaN(this.percentDeposit) || this.percentDeposit === '' || this.percentDeposit === null || this.percentDeposit !== this.percentDeposit.trim());
 
       do {
-        _this.moneyDeposit = prompt('Какая сумма заложена?', 12000);
+        this.moneyDeposit = prompt('Какая сумма заложена?', 12000);
       }
-      while (isNaN(_this.moneyDeposit) || _this.moneyDeposit !== _this.moneyDeposit.trim() || _this.moneyDeposit === null || _this.moneyDeposit === '');
+      while (isNaN(this.moneyDeposit) || this.moneyDeposit !== this.moneyDeposit.trim() || this.moneyDeposit === null || this.moneyDeposit === '');
     }
   };
 
   calcSavedMoney() {
-
     return budgetMonthValue.value * periodSelect.value;
   };
 
