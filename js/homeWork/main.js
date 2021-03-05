@@ -50,17 +50,18 @@ class AppData {
     controlButton.addEventListener('click', () => {
       if (salaryAmount.value === '') {
         alert('Ошибка, строка пустая. Заполните месячный доход.');
-      } else {
-        if (isNaN(this.percentDeposit) || this.percentDeposit === '' || this.percentDeposit === null) {
-          alert("Введите корректное значение в поле проценты. Вы ввели текст.");
-          controlButton.disabled = false;
-          this.start();
-        } else if (depositPercent.value < 0 || depositPercent.value > 100) {
-          alert("Введите корректное значение в поле проценты.");
-          controlButton.disabled = false;
-        }
+        return;
       }
-      this.start();
+
+      if (isNaN(this.percentDeposit) || this.percentDeposit === '' || this.percentDeposit === null) {
+        console.log(typeof this.percentDeposit);
+        alert("Введите корректное значение в поле проценты. Вы ввели текст.");
+        return;
+      } else if (depositPercent.value < 0 && depositPercent.value > 100) {
+        alert("Введите корректное значение в поле проценты.");
+        return;
+      }
+      this.start.bind(this);
     });
 
     expensesAddButton.addEventListener('click', this.addExpensesBlock);
@@ -93,9 +94,11 @@ class AppData {
     } else {
       depositBank.style.display = 'none';
       depositAmount.style.display = 'none';
+      depositPercent.style.display = 'none';
       depositBank.value = '';
       depositAmount.value = '';
-
+      depositPercent.value = '';
+      
       this.deposit = false;
       depositBank.removeEventListener('change', this.changePercent);
     }
