@@ -21,5 +21,16 @@ const myLesson = [
   { lesson: 14, type: 'basic', points: 4 },
   { lesson: 15, type: 'additional', points: 1 },
   { lesson: 16, type: 'additional', points: 7 },
-];
+]
+
+
+function funcArr() {
+  const [...arr] = myLesson;
+  arr.map((item) => {
+    console.log(item.type);
+  })
+}
+
+funcArr();
+
 
