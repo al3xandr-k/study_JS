@@ -51,17 +51,14 @@ class AppData {
       if (salaryAmount.value === '') {
         alert('Ошибка, строка пустая. Заполните месячный доход.');
         return;
-      }
-
-      if (isNaN(this.percentDeposit) || this.percentDeposit === '' || this.percentDeposit === null) {
-        console.log(typeof this.percentDeposit);
+      } else if (isNaN(this.percentDeposit) || this.percentDeposit === '' || this.percentDeposit === null || typeof this.percentDeposit === 'string' || typeof depositPercent.value !== 'string' || isNaN(depositPercent.value)) {
         alert("Введите корректное значение в поле проценты. Вы ввели текст.");
         return;
-      } else if (depositPercent.value < 0 && depositPercent.value > 100) {
+      } else if (depositPercent.value < 0 || depositPercent.value > 100) {
         alert("Введите корректное значение в поле проценты.");
         return;
       }
-      this.start.bind(this);
+      this.start();
     });
 
     expensesAddButton.addEventListener('click', this.addExpensesBlock);
@@ -98,7 +95,7 @@ class AppData {
       depositBank.value = '';
       depositAmount.value = '';
       depositPercent.value = '';
-      
+
       this.deposit = false;
       depositBank.removeEventListener('change', this.changePercent);
     }
@@ -190,7 +187,7 @@ class AppData {
     const monthDeposit = +this.moneyDeposit * (+this.percentDeposit / 100);
 
     this.budget = +salaryAmount.value;
-    this.budgetMonth = this.budget + this.incomeMonth - this.expensesMonth + monthDeposit;
+    this.budgetMonth = this.budget + this.incomeMonth - this.expensesMonth + +monthDeposit;
     this.budgetDay = Math.floor(this.budgetMonth / 30);
   };
 
@@ -237,8 +234,8 @@ class AppData {
 
   getInfoDeposit() {
     if (this.deposit) {
-      this.percentDeposit = parseInt(depositPercent.value);
-      this.moneyDeposit = depositAmount.value;
+      this.percentDeposit = Number(depositPercent.value);
+      this.moneyDeposit = Number(depositAmount.value);
     }
   };
 
