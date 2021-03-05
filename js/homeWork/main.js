@@ -47,7 +47,22 @@ class AppData {
   }
 
   eventListeners() {
-    controlButton.addEventListener('click', this.start.bind(this));
+    controlButton.addEventListener('click', () => {
+      if (salaryAmount.value === '') {
+        alert('Ошибка, строка пустая. Заполните месячный доход.');
+      } else {
+        if (isNaN(this.percentDeposit) || this.percentDeposit === '' || this.percentDeposit === null) {
+          alert("Введите корректное значение в поле проценты. Вы ввели текст.");
+          controlButton.disabled = false;
+          this.start();
+        } else if (depositPercent.value < 0 || depositPercent.value > 100) {
+          alert("Введите корректное значение в поле проценты.");
+          controlButton.disabled = false;
+        }
+      }
+      this.start();
+    });
+
     expensesAddButton.addEventListener('click', this.addExpensesBlock);
     incomeAddButton.addEventListener('click', this.addIncomeBlock);
     periodSelect.addEventListener('input', this.periodAmount);
@@ -171,11 +186,6 @@ class AppData {
   getBudget() {
     const monthDeposit = +this.moneyDeposit * (+this.percentDeposit / 100);
 
-    if (salaryAmount.value === '') {
-      alert('Ошибка, строка пустая. Заполните месячный доход.');
-      return;
-    }
-
     this.budget = +salaryAmount.value;
     this.budgetMonth = this.budget + this.incomeMonth - this.expensesMonth + monthDeposit;
     this.budgetDay = Math.floor(this.budgetMonth / 30);
@@ -227,27 +237,7 @@ class AppData {
       this.percentDeposit = parseInt(depositPercent.value);
       this.moneyDeposit = depositAmount.value;
     }
-
-
-
-
-    if (isNaN(this.percentDeposit) || this.percentDeposit === '' || this.percentDeposit === null) {
-      alert("Введите корректное значение в поле проценты. Вы ввели текст.");
-      //controlButton.setAttribute('disabled', false);
-      controlButton.disabled = false;
-
-
-    } else if (depositPercent.value < 0 || depositPercent.value > 100) {
-      alert("Введите корректное значение в поле проценты.");
-      //controlButton.setAttribute('disabled', false);
-      controlButton.disabled = false;
-
-    }
   };
-
-
-
-
 
   calcSavedMoney() {
     return budgetMonthValue.value * periodSelect.value;
