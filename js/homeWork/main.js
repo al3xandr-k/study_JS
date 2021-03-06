@@ -35,4 +35,4 @@ const funcArr = (arr) => {
 
 funcArr(myLesson)
 
-console.log('myLesson: ', arr)
+console.log('myLesson: ', myLesson)
