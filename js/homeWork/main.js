@@ -23,14 +23,17 @@ const myLesson = [
   { lesson: 16, type: 'additional', points: 7 },
 ]
 
-
 function funcArr() {
-  const [...arr] = myLesson;
-  arr.map((item) => {
-    console.log(item.type);
+
+  myLesson.map((item, index) => {
+
+    if (item.type.includes('additional') === true) {
+      myLesson.splice(index, 1)
+    } else if (item.type.includes('basic') === true) {
+      console.log(item.type.includes('basic'))
+    }
   })
 }
 
-funcArr();
-
-
+console.log(myLesson)
+funcArr()
