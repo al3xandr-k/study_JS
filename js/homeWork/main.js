@@ -1,7 +1,7 @@
+
 'use strict'
 
 /* Напишите функцию на JS. Цель: Убрать все объекты с типом additional, а для basic очки уменьшить в двое.
-
 Изменить необходимо исходный массив*/
 
 const myLesson = [
@@ -27,10 +27,14 @@ function funcArr() {
 
   myLesson.map((item, index) => {
 
-    if (item.type.includes('additional') === true) {
+    if (item.type.includes('additional')) {
       myLesson.splice(index, 1)
-    } else if (item.type.includes('basic') === true) {
-      console.log(item.type.includes('basic'))
+      // тут не удаляет последний элемент lesson: 16
+
+    } else if (item.type.includes('basic')) {
+      console.log('4 элемента а не все', item)
+      //тут почему та он видит только 4 элемента с type: basic
+
     }
   })
 }
