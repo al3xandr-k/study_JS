@@ -184,10 +184,17 @@ class AppData {
   };
 
   getBudget() {
-    const monthDeposit = +this.moneyDeposit * (+this.percentDeposit / 100);
+    let monthDeposit;
+    const valueSelect = this.value;
+
+    if (valueSelect === 'other') {
+      monthDeposit = this.moneyDeposit * (this.percentDeposit / 100);
+    } else if (depositBank.value) {
+      monthDeposit = valueSelect * (this.moneyDeposit / 100);
+    }
 
     this.budget = +salaryAmount.value;
-    this.budgetMonth = this.budget + this.incomeMonth - this.expensesMonth + +monthDeposit;
+    this.budgetMonth = this.budget + this.incomeMonth - this.expensesMonth + monthDeposit;
     this.budgetDay = Math.floor(this.budgetMonth / 30);
   };
 
@@ -234,8 +241,9 @@ class AppData {
 
   getInfoDeposit() {
     if (this.deposit) {
-      this.percentDeposit = Number(depositPercent.value);
-      this.moneyDeposit = Number(depositAmount.value);
+      this.percentDeposit = depositPercent.value;
+      this.moneyDeposit = depositAmount.value;
+      this.value = depositBank.value;
     }
   };
 
