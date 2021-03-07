@@ -31,8 +31,21 @@ const funcArr = (arr) => {
       myLesson[i].points = myLesson[i].points / 2
     }
   }
+  console.log('myLesson: ', arr)
 }
 
 funcArr(myLesson)
 
-console.log('myLesson: ', myLesson)
+
+//! Ещё один вариант как это можно было решить.
+
+// const newArr = myLesson.map(item => {
+//   const newItem = {lesson: item.lesson,
+//     type: item.type,
+//     points: item.points / 2
+//   }
+
+//   return newItem
+// }).filter(item => item.type !== 'additional')
+
+// console.log(newArr)
