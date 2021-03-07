@@ -23,18 +23,17 @@ const calculator = {
     calculator.show();
   },
   show() {
-    res.innerHTML = result
+    res.value = result
   }
 }
 
 btnSum.addEventListener('click', ()=>{
   calculator.sum();
+  calculator.show()
 });
 
 btnMult.addEventListener('click', ()=>{
   calculator.mult();
+  calculator.show()
 });
 
-// res.addEventListener('input', ()=>{
-//   calculator.show();
-// });
