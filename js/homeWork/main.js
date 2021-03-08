@@ -1,39 +1,17 @@
 'use strict'
 
-const a = document.querySelector('#a')
-const b = document.querySelector('#b')
-const btnSum = document.querySelector('#sum')
-const btnMult = document.querySelector('#mult')
-const res = document.querySelector('#res')
-let result
+function getResult(x, y) {
+  let result
 
-const calculator = {
-  sum() {
-    result = +a.value + +b.value
+  result = x ** y
+  let sum = result.toString().split('')
 
-    console.log('result: ', result)
-
-    calculator.show()
-  },
-  mult() {
-    result = +a.value * +b.value
-
-    console.log('result: ', result)
-
-    calculator.show()
-  },
-  show() {
-    res.value = result
-  }
+  sum.reduce((acc, item) => {
+    console.log(+acc + +item)
+    return +acc + +item
+  }, 0)
+  
+  return result
 }
 
-btnSum.addEventListener('click', ()=>{
-  calculator.sum()
-  calculator.show()
-})
-
-btnMult.addEventListener('click', ()=>{
-  calculator.mult()
-  calculator.show()
-})
-
+console.log(getResult(4, 8))
