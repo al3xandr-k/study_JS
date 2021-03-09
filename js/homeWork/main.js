@@ -4,14 +4,12 @@ function getResult(x, y) {
   let result
 
   result = x ** y
-  let sum = result.toString().split('')
 
-  sum.reduce((acc, item) => {
-    console.log(+acc + +item)
+  let sum = result.toString().split('').reduce((acc, item) => {
     return +acc + +item
-  }, 0)
-  
-  return result
+  })
+
+  return sum
 }
 
 console.log(getResult(4, 8))
