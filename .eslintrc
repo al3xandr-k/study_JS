@@ -38,7 +38,7 @@
       "always"
     ],
     "strict": [
-      "error",
+      "error", 
       "global"
     ],
     "brace-style": [

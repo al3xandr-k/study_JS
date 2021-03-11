@@ -20,9 +20,9 @@ window.addEventListener('DOMContentLoaded', () => {
 			const timeRemaining = (dateStop - dateNow) / 1000;
 			const seconds = Math.floor(timeRemaining % 60);
 			const minutes = Math.floor((timeRemaining / 60) % 60);
-			const hours = Math.floor(timeRemaining / 60 / 60) % 24;
-			const day = Math.floor(timeRemaining / 60 / 60 / 24);
-			return { timeRemaining, hours, minutes, seconds, day };
+			const hours = Math.floor(timeRemaining / 60 / 60);
+
+			return { timeRemaining, hours, minutes, seconds };
 
 		};
 
