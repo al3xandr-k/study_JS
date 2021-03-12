@@ -1,60 +1,52 @@
-let print1 = function() {
-  console.log('Крот');
-}
-let print2 = function() {
-  console.log('овце,');
-}
-let print3 = function() {
-  console.log('жирафу,');
-}
-let print4 = function() {
-  console.log('зайке');
-}
-let print5 = function() {
-  console.log('голубые');
-}
-let print6 = function() {
-  console.log('сшил');
-}
-let print7 = function() {
-  console.log('фуфайки');
-}
-
-let func1 = function() {
-  // ...
-  print3()
+const print1 = function() {
+	console.log('Крот');
+};
+const print2 = function() {
+	console.log('овце,');
+};
+const print3 = function() {
+	console.log('жирафу,');
+};
+const print4 = function() {
+	console.log('зайке');
+};
+const print5 = function() {
+	console.log('голубые');
+};
+const print6 = function() {
+	console.log('сшил');
+};
+const print7 = function() {
+	console.log('фуфайки');
 };
 
-let func2 = function() {
-  func1();
+const func1 = function() {
+	print3();
+};
 
-  setTimeout(function() {
-    // ...
-    print6()
-  }, 1000);
-}
+const func2 = function() {
+	func1();
 
-let func3 = function() {
-  setTimeout(function() {
-    func2();
-    // ...
-    print4()
-  }, 250);
+	setTimeout(() => {
+		print6();
+	}, 1000);
+};
 
-  // ...
-  print2()
-}
+const func3 = function() {
+	setTimeout(() => {
+		func2();
+		print4();
+	}, 250);
+	print2();
+};
 
-setTimeout(function() {
-  // ...
-  print5()
-  setTimeout(function() {
-    // ...
-    print7()
-  }, 750);
+setTimeout(() => {
+	print5();
+	setTimeout(() => {
+		print7();
+	}, 750);
 }, 500);
 
-// ...
-print1()
+print1();
 
 func3();
