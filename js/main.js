@@ -4,7 +4,6 @@ window.addEventListener('DOMContentLoaded', () => {
 		const timerHours = document.querySelector('#timer-hours');
 		const timerMinutes = document.querySelector('#timer-minutes');
 		const timerSeconds = document.querySelector('#timer-seconds');
-		const timeInterval = setInterval(updateClock, 1000);
 
 		const addZero = num => {
 			if (num <= 9) {
@@ -38,11 +37,11 @@ window.addEventListener('DOMContentLoaded', () => {
 				timerMinutes.textContent = '00';
 				timerHours.textContent = '00';
 			} else if (timer.timeRemaining > 0) {
-				setTimeout(updateClock, 1000);
+				setTimeout(updateClock);
 			}
-			clearInterval(timeInterval);
+			clearInterval();
 		}
 		updateClock();
 	};
-	timer('2021-03-12');
+	timer('2021-03-13');
 });
