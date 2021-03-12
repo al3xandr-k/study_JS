@@ -4,7 +4,7 @@ window.addEventListener('DOMContentLoaded', () => {
 		const timerHours = document.querySelector('#timer-hours');
 		const timerMinutes = document.querySelector('#timer-minutes');
 		const timerSeconds = document.querySelector('#timer-seconds');
-		
+
 		const addZero = num => {
 			if (num <= 9) {
 				return '0' + num;
