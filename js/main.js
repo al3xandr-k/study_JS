@@ -1,5 +1,6 @@
 window.addEventListener('DOMContentLoaded', () => {
 
+	//Таймер акции.
 	const timer = deadline => {
 		const timerHours = document.querySelector('#timer-hours');
 		const timerMinutes = document.querySelector('#timer-minutes');
@@ -44,4 +45,40 @@ window.addEventListener('DOMContentLoaded', () => {
 		updateClock();
 	};
 	timer('2021-03-13');
+
+	//меню Гамбургер.
+	const toggleMenu = () => {
+		const btnMenu = document.querySelector('.menu');
+		const menu = document.querySelector('menu');
+		const btnClose = document.querySelector('.close-btn');
+		const menuItem = menu.querySelectorAll('ul > li');
+
+
+		const handlerMenu = () => {
+			menu.classList.toggle('active-menu');
+		};
+
+		btnMenu.addEventListener('click', handlerMenu);
+		btnClose.addEventListener('click', handlerMenu);
+		menuItem.forEach(item => item.addEventListener('click', handlerMenu));
+
+	};
+	toggleMenu();
+
+	//PopUp window.
+	const togglePopUp = () => {
+		const popUp = document.querySelector('.popup');
+		const btnPopUp = document.querySelectorAll('.popup-btn');
+		const btnPopUpClose = document.querySelector('.popup-close');
+		btnPopUp.forEach(elem => {
+			elem.addEventListener('click', () => {
+				popUp.style.display = 'block';
+			});
+		});
+
+		btnPopUpClose.addEventListener('click', () => {
+			popUp.style.display = 'none';
+		});
+	};
+	togglePopUp();
 });
