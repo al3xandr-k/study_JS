@@ -1,6 +1,6 @@
 window.addEventListener('DOMContentLoaded', () => {
 
-	//Таймер акции.
+	//Timer.
 	const timer = deadline => {
 		const timerHours = document.querySelector('#timer-hours');
 		const timerMinutes = document.querySelector('#timer-minutes');
@@ -44,15 +44,14 @@ window.addEventListener('DOMContentLoaded', () => {
 		}
 		updateClock();
 	};
-	timer('2021-03-13');
+	timer('2021-03-14');
 
-	//меню Гамбургер.
+	//Menu Hamburger.
 	const toggleMenu = () => {
 		const btnMenu = document.querySelector('.menu');
 		const menu = document.querySelector('menu');
 		const btnClose = document.querySelector('.close-btn');
 		const menuItem = menu.querySelectorAll('ul > li');
-
 
 		const handlerMenu = () => {
 			menu.classList.toggle('active-menu');
@@ -70,13 +69,34 @@ window.addEventListener('DOMContentLoaded', () => {
 		const popUp = document.querySelector('.popup');
 		const btnPopUp = document.querySelectorAll('.popup-btn');
 		const btnPopUpClose = document.querySelector('.popup-close');
+		const popUpContent = document.querySelector('.popup-content');
+		let count = 0;
+
 		btnPopUp.forEach(elem => {
 			elem.addEventListener('click', () => {
 				popUp.style.display = 'block';
+			
+				//PopUp animation.
+				const animateDown = () => {
+					count++;
+					if (count < 160) {
+						popUpContent.style.top = count + 'px';
+						setTimeout(animateDown, 20);
+					} else {
+						clearInterval(interval);
+					};
+				};
+		
+				let interval = setInterval(animateDown, 20);
+				//PopUp animation End.
 			});
 		});
 
 		btnPopUpClose.addEventListener('click', () => {
+			popUp.style.display = 'none';
+		});
+
+		popUp.addEventListener('click', () => {
 			popUp.style.display = 'none';
 		});
 	};
