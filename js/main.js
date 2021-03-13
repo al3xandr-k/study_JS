@@ -1,4 +1,5 @@
 window.addEventListener('DOMContentLoaded', () => {
+	'use strict';
 
 	//Timer.
 	const timer = deadline => {
@@ -96,15 +97,20 @@ window.addEventListener('DOMContentLoaded', () => {
 					});
 				}
 
-				animate({
-					duration: 200,
-					timing(timeFraction) {
-						return timeFraction;
-					},
-					draw(progress) {
-						popUpContent.style.top = progress * 250 + 'px';
-					}
-				});
+				if (window.screen.width > 768) {
+					animate({
+						duration: 200,
+						timing(timeFraction) {
+							return timeFraction;
+						},
+						draw(progress) {
+							popUpContent.style.top = progress * 250 + 'px';
+						}
+					});
+				} else {
+					popUp.style.display = 'block';
+					popUpContent.style.transform = '';
+				};
 				//PopUp animation End.
 			});
 		});
