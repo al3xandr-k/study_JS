@@ -70,24 +70,41 @@ window.addEventListener('DOMContentLoaded', () => {
 		const btnPopUp = document.querySelectorAll('.popup-btn');
 		const btnPopUpClose = document.querySelector('.popup-close');
 		const popUpContent = document.querySelector('.popup-content');
-		let count = 0;
+		//let count = 0;
 
 		btnPopUp.forEach(elem => {
 			elem.addEventListener('click', () => {
 				popUp.style.display = 'block';
-			
+
 				//PopUp animation.
-				const animateDown = () => {
-					count++;
-					if (count < 160) {
-						popUpContent.style.top = count + 'px';
-						setTimeout(animateDown, 20);
-					} else {
-						clearInterval(interval);
-					};
-				};
-		
-				let interval = setInterval(animateDown, 20);
+				function animate({ timing, draw, duration }) {
+
+					let start = performance.now();
+
+					requestAnimationFrame(function animate(time) {
+						let timeFraction = (time - start) / duration;
+						if (timeFraction > 1) timeFraction = 1;
+
+						let progress = timing(timeFraction);
+
+						draw(progress);
+
+						if (timeFraction < 1) {
+							requestAnimationFrame(animate);
+						}
+
+					});
+				}
+
+				animate({
+					duration: 200,
+					timing(timeFraction) {
+						return timeFraction;
+					},
+					draw(progress) {
+						popUpContent.style.top = progress * 250 + 'px';
+					}
+				});
 				//PopUp animation End.
 			});
 		});
