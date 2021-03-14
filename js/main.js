@@ -85,59 +85,26 @@ window.addEventListener('DOMContentLoaded', () => {
 	const toggleMenu = () => {
 		const btnMenu = document.querySelector('.menu');
 		const menu = document.querySelector('menu');
-		const btnClose = document.querySelector('.close-btn');
-		const menuItem = menu.querySelectorAll('ul > li');
 
-		const handlerMenu = (index) => {
+		const handlerMenu = () => {
 			menu.classList.toggle('active-menu');
-
-			for (let i = 0; i < menuItem.length; i++) {
-				if (index === i) {
-					menuItem[i].classList.add('active-menu');
-				} else {
-					menuItem[i].classList.remove('active-menu');
-				}
-			};
 		};
 
-		// const menuAction = (item) => {
-		// 	item.addEventListener('click', (event) => {
-		// 		let target = event.target;
-		// 		target = menu.classList.toggle('active-menu');
-		// 		console.log('target: ', target);
-		// 	});
-		// };
+		btnMenu.addEventListener('click', handlerMenu);
 
-		// menuAction(btnMenu);
-		// menuAction(btnClose);
-
-		btnMenu.addEventListener('click', (event) => {
+		menu.addEventListener('click', (event) => {
 			let target = event.target;
-			target = handlerMenu();
 
-			menuItem.forEach((item) => item.addEventListener('click', (index) => {
-				let target = event.target;
-				target = handlerMenu(index);
-			}));
-
+			if (target.classList.contains('close-btn')) {
+				handlerMenu();
+			} else if (target.tagName === 'A' && target.closest('menu')) {
+				handlerMenu();
+			} else if (target.closest('menu')){
+				return;
+			} else {
+				menu.classList.remove('active-menu');
+			};
 		});
-
-		btnClose.addEventListener('click', (event) => {
-			let target = event.target;
-			target = menu.classList.toggle('active-menu');
-		});
-
-		// btnMenu.addEventListener('click', (e) => {
-		// 	handlerMenu();
-		// 	console.log(e.target);
-		// });
-
-		// btnClose.addEventListener('click', (e) => {
-		// 	handlerMenu();
-		// 	console.log(e.target);
-		// });
-
-		//menuItem.forEach(item => item.addEventListener('click', handlerMenu));
 	};
 	toggleMenu();
 
