@@ -95,11 +95,13 @@ window.addEventListener('DOMContentLoaded', () => {
 		menu.addEventListener('click', (event) => {
 			let target = event.target;
 
-			if (target.classList.contains('close-btn')) {
+			if (target.closest('.menu')) {
+				handlerMenu();
+			} else if (target.classList.contains('close-btn')) {
 				handlerMenu();
 			} else if (target.tagName === 'A' && target.closest('menu')) {
 				handlerMenu();
-			} else if (target.closest('menu')){
+			} else if (target.closest('menu')) {
 				return;
 			} else {
 				menu.classList.remove('active-menu');
