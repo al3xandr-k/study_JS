@@ -88,14 +88,56 @@ window.addEventListener('DOMContentLoaded', () => {
 		const btnClose = document.querySelector('.close-btn');
 		const menuItem = menu.querySelectorAll('ul > li');
 
-		const handlerMenu = () => {
+		const handlerMenu = (index) => {
 			menu.classList.toggle('active-menu');
+
+			for (let i = 0; i < menuItem.length; i++) {
+				if (index === i) {
+					menuItem[i].classList.add('active-menu');
+				} else {
+					menuItem[i].classList.remove('active-menu');
+				}
+			};
 		};
 
-		btnMenu.addEventListener('click', handlerMenu);
-		btnClose.addEventListener('click', handlerMenu);
-		menuItem.forEach(item => item.addEventListener('click', handlerMenu));
+		// const menuAction = (item) => {
+		// 	item.addEventListener('click', (event) => {
+		// 		let target = event.target;
+		// 		target = menu.classList.toggle('active-menu');
+		// 		console.log('target: ', target);
+		// 	});
+		// };
 
+		// menuAction(btnMenu);
+		// menuAction(btnClose);
+
+		btnMenu.addEventListener('click', (event) => {
+			let target = event.target;
+			target = handlerMenu();
+
+			menuItem.forEach((item) => item.addEventListener('click', (index) => {
+				let target = event.target;
+				target = handlerMenu(index);
+			}));
+
+		});
+
+		btnClose.addEventListener('click', (event) => {
+			let target = event.target;
+			target = menu.classList.toggle('active-menu');
+		});
+
+		// btnMenu.addEventListener('click', (e) => {
+		// 	handlerMenu();
+		// 	console.log(e.target);
+		// });
+
+		// btnClose.addEventListener('click', (e) => {
+		// 	handlerMenu();
+		// 	console.log(e.target);
+		// });
+
+		//menuItem.forEach(item => item.addEventListener('click', handlerMenu));
 	};
 	toggleMenu();
 
@@ -154,7 +196,7 @@ window.addEventListener('DOMContentLoaded', () => {
 				popUp.style.display = 'none';
 			} else {
 				target = target.closest('.popup-content');
-				
+
 				if (!target) {
 					popUp.style.display = 'none';
 				};
