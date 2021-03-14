@@ -47,6 +47,40 @@ window.addEventListener('DOMContentLoaded', () => {
 	};
 	timer('2021-03-14');
 
+	//Smooth scroll to section.
+	const smoothScroll = () => {
+		//All buttons of sections menu.
+		const btnScrollBlock = document.querySelectorAll('a[href="#service-block"]');
+		const btnScrollPortfolio = document.querySelector('a[href="#portfolio"]');
+		const btnScrollCalc = document.querySelector('a[href="#calc"]');
+		const btnScrollCommand = document.querySelector('a[href="#command"]');
+		const btnScrollConnect = document.querySelector('a[href="#connect"]');
+
+		//All sections.
+		const serviceSection = document.querySelector('#service-block');
+		const portfolioSection = document.querySelector('#portfolio');
+		const calcSection = document.querySelector('#calc');
+		const commandSection = document.querySelector('#command');
+		const connectSection = document.querySelector('#connect');
+
+		//Menu button smooth scroll to next section.
+		const allBtn = (button, section) => {
+			button.addEventListener('click', (event) => {
+				event.preventDefault();
+
+				section.scrollIntoView({ behavior: "smooth" });
+			});
+		};
+
+		allBtn(btnScrollBlock[0], serviceSection);
+		allBtn(btnScrollBlock[1], serviceSection);
+		allBtn(btnScrollPortfolio, portfolioSection);
+		allBtn(btnScrollCalc, calcSection);
+		allBtn(btnScrollCommand, commandSection);
+		allBtn(btnScrollConnect, connectSection);
+	};
+	smoothScroll();
+
 	//Menu Hamburger.
 	const toggleMenu = () => {
 		const btnMenu = document.querySelector('.menu');
@@ -69,9 +103,7 @@ window.addEventListener('DOMContentLoaded', () => {
 	const togglePopUp = () => {
 		const popUp = document.querySelector('.popup');
 		const btnPopUp = document.querySelectorAll('.popup-btn');
-		const btnPopUpClose = document.querySelector('.popup-close');
 		const popUpContent = document.querySelector('.popup-content');
-		//let count = 0;
 
 		btnPopUp.forEach(elem => {
 			elem.addEventListener('click', () => {
@@ -115,13 +147,53 @@ window.addEventListener('DOMContentLoaded', () => {
 			});
 		});
 
-		btnPopUpClose.addEventListener('click', () => {
-			popUp.style.display = 'none';
-		});
+		popUp.addEventListener('click', (event) => {
+			let target = event.target;
 
-		popUp.addEventListener('click', () => {
-			popUp.style.display = 'none';
+			if (target.classList.contains('popup-close')) {
+				popUp.style.display = 'none';
+			} else {
+				target = target.closest('.popup-content');
+				
+				if (!target) {
+					popUp.style.display = 'none';
+				};
+			};
 		});
 	};
 	togglePopUp();
+
+	//Tabs
+	const tabs = () => {
+		const serviceHeader = document.querySelector('.service-header');
+		const serviceHeaderTab = serviceHeader.querySelectorAll('.service-header-tab');
+		const serviceTab = document.querySelectorAll('.service-tab');
+
+		const toogleTabContent = (index) => {
+			for (let i = 0; i < serviceTab.length; i++) {
+				if (index === i) {
+					serviceHeaderTab[i].classList.add('active');
+					serviceTab[i].classList.remove('d-none');
+				} else {
+					serviceHeaderTab[i].classList.remove('active');
+					serviceTab[i].classList.add('d-none');
+				};
+			};
+		};
+
+		serviceHeader.addEventListener('click', (event) => {
+			let target = event.target;
+			target = target.closest('.service-header-tab');
+
+			if (target) {
+				serviceHeaderTab.forEach((item, index) => {
+					if (item === target) {
+						toogleTabContent(index);
+					};
+				});
+			};
+		});
+	};
+
+	tabs();
 });
