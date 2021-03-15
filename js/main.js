@@ -85,6 +85,7 @@ window.addEventListener('DOMContentLoaded', () => {
 	const toggleMenu = () => {
 		const btnMenu = document.querySelector('.menu');
 		const menu = document.querySelector('menu');
+		const main = document.querySelector('main');
 
 		const handlerMenu = () => {
 			menu.classList.toggle('active-menu');
@@ -101,7 +102,9 @@ window.addEventListener('DOMContentLoaded', () => {
 				handlerMenu();
 			} else if (target.tagName === 'A') {
 				handlerMenu();
-			};
+			} else {
+				return;
+			}
 		});
 	};
 	toggleMenu();
