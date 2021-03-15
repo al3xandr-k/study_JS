@@ -99,12 +99,8 @@ window.addEventListener('DOMContentLoaded', () => {
 				handlerMenu();
 			} else if (target.classList.contains('close-btn')) {
 				handlerMenu();
-			} else if (target.tagName === 'A' && target.closest('menu')) {
+			} else if (target.tagName === 'A') {
 				handlerMenu();
-			} else if (target.closest('menu')) {
-				return;
-			} else {
-				menu.classList.remove('active-menu');
 			};
 		});
 	};
