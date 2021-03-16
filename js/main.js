@@ -216,15 +216,14 @@ window.addEventListener('DOMContentLoaded', () => {
 		let interval;
 
 		const dotsAdd = () => {
-			
 
-			for (let i = 0; i < slide.length; i++) {
+			slide.forEach(() => {
 				const portfolioDots = document.querySelector('.portfolio-dots');
 				const li = document.createElement('li');
 
 				li.classList.add('dot');
 				portfolioDots.append(li);
-			}
+			})
 
 			dot = document.querySelectorAll('.dot');
 
