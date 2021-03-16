@@ -209,8 +209,8 @@ window.addEventListener('DOMContentLoaded', () => {
 	//Slider
 	const slider = () => {
 		const slide = document.querySelectorAll('.portfolio-item');
-		let dot = document.querySelectorAll('.dot');
 		const slider = document.querySelector('.portfolio-content');
+		let dot = document.querySelectorAll('.dot');
 
 		let currentSlide = 0;
 		let interval;
