@@ -45,7 +45,7 @@ window.addEventListener('DOMContentLoaded', () => {
 		}
 		updateClock();
 	};
-	timer('2021-03-14');
+	timer('2021-03-17');
 
 	//Smooth scroll to section.
 	const smoothScroll = () => {
@@ -95,7 +95,7 @@ window.addEventListener('DOMContentLoaded', () => {
 				handlerMenu();
 			} else if (target.tagName === 'A' && target.closest('menu')) {
 				handlerMenu();
-			} else if(target.closest('menu')) {
+			} else if (target.closest('menu')) {
 				return;
 			} else {
 				menu.classList.remove('active-menu');
@@ -209,12 +209,33 @@ window.addEventListener('DOMContentLoaded', () => {
 	//Slider
 	const slider = () => {
 		const slide = document.querySelectorAll('.portfolio-item');
-		//const btn = document.querySelectorAll('.portfolio-btn');
-		const dot = document.querySelectorAll('.dot');
+		let dot = document.querySelectorAll('.dot');
 		const slider = document.querySelector('.portfolio-content');
 
 		let currentSlide = 0;
 		let interval;
+
+		const dotsAdd = () => {
+			
+
+			for (let i = 0; i < slide.length; i++) {
+				const portfolioDots = document.querySelector('.portfolio-dots');
+				const li = document.createElement('li');
+
+				li.classList.add('dot');
+				portfolioDots.append(li);
+			}
+
+			dot = document.querySelectorAll('.dot');
+
+			dot.forEach((item) => {
+				if (!item.classList.contains('dot-active')) {
+					prevSlide(dot, currentSlide, 'dot-active');
+					nextSlide(dot, currentSlide, 'dot-active');
+				}
+			});
+
+		};
 
 		const prevSlide = (elem, index, strClass) => {
 			elem[index].classList.remove(strClass);
@@ -298,6 +319,7 @@ window.addEventListener('DOMContentLoaded', () => {
 			};
 		});
 
+		dotsAdd();
 		startSlide(2000);
 	};
 
