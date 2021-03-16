@@ -83,16 +83,16 @@ window.addEventListener('DOMContentLoaded', () => {
 
 	//Menu Hamburger.
 	const toggleMenu = () => {
-		const btnMenu = document.querySelector('.menu');
+		const body = document.querySelector('body');
 		const menu = document.querySelector('menu');
 
 		const handlerMenu = () => {
 			menu.classList.toggle('active-menu');
 		};
 
-		btnMenu.addEventListener('click', handlerMenu);
+		//btnMenu.addEventListener('click', handlerMenu);
 
-		menu.addEventListener('click', (event) => {
+		body.addEventListener('click', (event) => {
 			let target = event.target;
 
 			if (target.closest('.menu')) {
@@ -209,7 +209,7 @@ window.addEventListener('DOMContentLoaded', () => {
 	//Slider
 	const slider = () => {
 		const slide = document.querySelectorAll('.portfolio-item');
-		const btn = document.querySelectorAll('.portfolio-btn');
+		//const btn = document.querySelectorAll('.portfolio-btn');
 		const dot = document.querySelectorAll('.dot');
 		const slider = document.querySelector('.portfolio-content');
 
