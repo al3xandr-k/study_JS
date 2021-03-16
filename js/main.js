@@ -86,12 +86,6 @@ window.addEventListener('DOMContentLoaded', () => {
 		const body = document.querySelector('body');
 		const menu = document.querySelector('menu');
 
-		const handlerMenu = () => {
-			menu.classList.toggle('active-menu');
-		};
-
-		//btnMenu.addEventListener('click', handlerMenu);
-
 		body.addEventListener('click', (event) => {
 			let target = event.target;
 
@@ -99,12 +93,18 @@ window.addEventListener('DOMContentLoaded', () => {
 				handlerMenu();
 			} else if (target.classList.contains('close-btn')) {
 				handlerMenu();
-			} else if (target.tagName === 'A') {
+			} else if (target.tagName === 'A' && target.closest('menu')) {
 				handlerMenu();
-			} else {
+			} else if(target.closest('menu')) {
 				return;
+			} else {
+				menu.classList.remove('active-menu');
 			};
 		});
+
+		const handlerMenu = () => {
+			menu.classList.toggle('active-menu');
+		};
 	};
 	toggleMenu();
 
