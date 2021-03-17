@@ -11,12 +11,12 @@
   "rules": {
     "indent": [
       "error",
-      4
+      2
       //"tab"
     ],
     "linebreak-style": [
       "error",
-      // "windows"
+      "windows",
        "unix"
     ],
     "semi": [
