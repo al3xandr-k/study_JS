@@ -30,6 +30,7 @@ class Todo {
     li.insertAdjacentHTML('beforeend', `
       <span class="text-todo">${todo.value}</span>
       <div class="todo-buttons">
+
         <button class="todo-remove"></button>
         <button class="todo-complete"></button>
       </div>
