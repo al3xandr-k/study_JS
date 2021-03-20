@@ -203,7 +203,6 @@ window.addEventListener('DOMContentLoaded', () => {
 			};
 		});
 	};
-
 	tabs();
 
 	//Slider.
@@ -321,80 +320,72 @@ window.addEventListener('DOMContentLoaded', () => {
 		dotsAdd();
 		startSlide(2000);
 	};
-
 	slider();
 
 	//change photo section "Our team".
 	const photoTeam = () => {
 		const photoTeam = document.querySelectorAll('.command__photo');
+		const arrSrc = [];
+
+		photoTeam.forEach(item => {
+			arrSrc.push(item.src);
+		});
 
 		photoTeam.forEach((item, index) => {
+			item.addEventListener('mouseover', (event) => {
+				const target = event.target;
 
-			const src = (url) => {
-				return url.split('/').slice(-1);
-			};
-
-			item.addEventListener('mouseover', () => {
-
-				if (index === 0) {
-					item.setAttribute('src', `images/command/${src('images/command/command-1a.jpg')}`);
-				} else if (index === 1) {
-					item.setAttribute('src', `images/command/${src('images/command/command-2a.jpg')}`);
-				} else if (index === 2) {
-					item.setAttribute('src', `images/command/${src('images/command/command-3a.jpg')}`);
-				} else if (index === 3) {
-					item.setAttribute('src', `images/command/${src('images/command/command-4a.jpg')}`);
-				} else if (index === 4) {
-					item.setAttribute('src', `images/command/${src('images/command/command-5a.jpg')}`);
-				} else if (index === 5) {
-					item.setAttribute('src', `images/command/${src('images/command/command-6a.jpg')}`);
-				};
+				target.src = target.dataset.img;
 			});
 
-			item.addEventListener('mouseout', () => {
-				if (index === 0) {
-					item.setAttribute('src', `images/command/${src('images/command/command-1.jpg')}`);
-				} else if (index === 1) {
-					item.setAttribute('src', `images/command/${src('images/command/command-2.jpg')}`);
-				} else if (index === 2) {
-					item.setAttribute('src', `images/command/${src('images/command/command-3.jpg')}`);
-				} else if (index === 3) {
-					item.setAttribute('src', `images/command/${src('images/command/command-4.jpg')}`);
-				} else if (index === 4) {
-					item.setAttribute('src', `images/command/${src('images/command/command-5.jpg')}`);
-				} else if (index === 5) {
-					item.setAttribute('src', `images/command/${src('images/command/command-6.jpg')}`);
+			item.addEventListener('mouseout', (event) => {
+				const target = event.target;
+
+				if (event.type === 'mouseout') {
+					target.src = arrSrc[index];
 				};
 			});
 		});
 	};
-
 	photoTeam();
 
 	//RegExp section calc sum.
 	const regularExpression = () => {
 		const calcItem = document.querySelectorAll('input.calc-item');
 		const totalId = document.getElementById('total');
-		const form2Name = document.getElementById('form2-name');
-		const form2Message = document.getElementById('form2-message');
-
+		const secondFormName = document.getElementById('form2-name');
+		const secondFormMessage = document.getElementById('form2-message');
+		const secondFormEmail = document.getElementById('form2-email');
 
 		//Section calc sum.
 		calcItem.forEach(item => {
 			item.addEventListener('input', () => {
-				let text = item.value;
+				// let text = item.value;
 
-				totalId.textContent = text.replace(/\D/g, '');
+				totalId.textContent = item.value.replace(/\D/g, '');
 			});
 		});
 
-		//Section connect.
+		//Section connect regular expression.
+		const expFunc = () => {
 
-		if (form2Name && form2Message) {
-			form2Name.value.match(/([а-я])\s/gi);
-			form2Message.value.match(/([а-я])\s\.\,+/gi);
+			//Expression name input.
+			secondFormName.addEventListener('input', () => {
+				secondFormName.value = secondFormName.value.replace(/[a-z\d/.,-=()!@#$%^&*_+]/gi, '');
+			});
+
+			//Expression placeholder.
+			secondFormMessage.addEventListener('input', () => {
+				secondFormMessage.value = secondFormMessage.value.replace(/[a-z]/gi, '');
+			});
+
+			//Expression emain input.
+			secondFormEmail.addEventListener('input', () => {
+				secondFormEmail.value = secondFormEmail.value.replace(/[а-я\s/()]/gi, '');
+			});
 		};
-	};
 
+		expFunc();
+	};
 	regularExpression();
 });
