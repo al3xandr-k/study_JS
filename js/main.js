@@ -392,7 +392,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 		if (form2Name && form2Message) {
 			form2Name.value.match(/([а-я])\s/gi);
-			form2Message.value.match(/([а-я])\s\.+/gi);
+			form2Message.value.match(/([а-я])\s\.\,+/gi);
 		};
 	};
 
