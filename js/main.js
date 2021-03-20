@@ -172,7 +172,7 @@ window.addEventListener('DOMContentLoaded', () => {
 	};
 	togglePopUp();
 
-	//Tabs
+	//Tabs.
 	const tabs = () => {
 		const serviceHeader = document.querySelector('.service-header');
 		const serviceHeaderTab = serviceHeader.querySelectorAll('.service-header-tab');
@@ -206,7 +206,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 	tabs();
 
-	//Slider
+	//Slider.
 	const slider = () => {
 		const slide = document.querySelectorAll('.portfolio-item');
 		const slider = document.querySelector('.portfolio-content');
@@ -323,4 +323,78 @@ window.addEventListener('DOMContentLoaded', () => {
 	};
 
 	slider();
+
+	//change photo section "Our team".
+	const photoTeam = () => {
+		const photoTeam = document.querySelectorAll('.command__photo');
+
+		photoTeam.forEach((item, index) => {
+
+			const src = (url) => {
+				return url.split('/').slice(-1);
+			};
+
+			item.addEventListener('mouseover', () => {
+
+				if (index === 0) {
+					item.setAttribute('src', `images/command/${src('images/command/command-1a.jpg')}`);
+				} else if (index === 1) {
+					item.setAttribute('src', `images/command/${src('images/command/command-2a.jpg')}`);
+				} else if (index === 2) {
+					item.setAttribute('src', `images/command/${src('images/command/command-3a.jpg')}`);
+				} else if (index === 3) {
+					item.setAttribute('src', `images/command/${src('images/command/command-4a.jpg')}`);
+				} else if (index === 4) {
+					item.setAttribute('src', `images/command/${src('images/command/command-5a.jpg')}`);
+				} else if (index === 5) {
+					item.setAttribute('src', `images/command/${src('images/command/command-6a.jpg')}`);
+				};
+			});
+
+			item.addEventListener('mouseout', () => {
+				if (index === 0) {
+					item.setAttribute('src', `images/command/${src('images/command/command-1.jpg')}`);
+				} else if (index === 1) {
+					item.setAttribute('src', `images/command/${src('images/command/command-2.jpg')}`);
+				} else if (index === 2) {
+					item.setAttribute('src', `images/command/${src('images/command/command-3.jpg')}`);
+				} else if (index === 3) {
+					item.setAttribute('src', `images/command/${src('images/command/command-4.jpg')}`);
+				} else if (index === 4) {
+					item.setAttribute('src', `images/command/${src('images/command/command-5.jpg')}`);
+				} else if (index === 5) {
+					item.setAttribute('src', `images/command/${src('images/command/command-6.jpg')}`);
+				};
+			});
+		});
+	};
+
+	photoTeam();
+
+	//RegExp section calc sum.
+	const regularExpression = () => {
+		const calcItem = document.querySelectorAll('input.calc-item');
+		const totalId = document.getElementById('total');
+		const form2Name = document.getElementById('form2-name');
+		const form2Message = document.getElementById('form2-message');
+
+
+		//Section calc sum.
+		calcItem.forEach(item => {
+			item.addEventListener('input', () => {
+				let text = item.value;
+
+				totalId.textContent = text.replace(/\D/g, '');
+			});
+		});
+
+		//Section connect.
+
+		if (form2Name && form2Message) {
+			form2Name.value.match(/([а-я])\s/gi);
+			form2Message.value.match(/([а-я])\s\.+/gi);
+		};
+	};
+
+	regularExpression();
 });
