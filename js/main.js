@@ -362,34 +362,28 @@ window.addEventListener('DOMContentLoaded', () => {
 		calcItem.forEach(item => {
 			item.addEventListener('input', () => {
 
-				totalId.textContent = item.value.replace(/[\D/]/g, '');
+				item.value = item.value.replace(/[\D/]/g, '');
 			});
 		});
 
-		//Section connect regular expression.
-		const expFunc = () => {
+		//Expression name input.
+		secondFormName.addEventListener('input', () => {
+			secondFormName.value = secondFormName.value.replace(/[a-z\d/.,-=()!@#$%^&*_+<>]/gi, '');
+		});
 
-			//Expression name input.
-			secondFormName.addEventListener('input', () => {
-				secondFormName.value = secondFormName.value.replace(/[a-z\d/.,-=()!@#$%^&*_+<>]/gi, '');
-			});
+		//Expression placeholder.
+		secondFormMessage.addEventListener('input', () => {
+			secondFormMessage.value = secondFormMessage.value.replace(/[a-z]/gi, '');
+		});
 
-			//Expression placeholder.
-			secondFormMessage.addEventListener('input', () => {
-				secondFormMessage.value = secondFormMessage.value.replace(/[a-z]/gi, '');
-			});
-
-			//Expression emain input.
-			secondFormEmail.addEventListener('input', () => {
-				secondFormEmail.value = secondFormEmail.value.replace(/[а-я\s/()<>]/gi, '');
-			});
-			//Expression phone number input.
-			secondFormPhone.addEventListener('input', () => {
-				secondFormPhone.value = secondFormPhone.value.replace(/[a-zа-я\s/.,!@#$%^&=*<>":{}|?_~`]/gi, '');
-			});
-		};
-
-		expFunc();
+		//Expression emain input.
+		secondFormEmail.addEventListener('input', () => {
+			secondFormEmail.value = secondFormEmail.value.replace(/[а-я\s/()<>]/gi, '');
+		});
+		//Expression phone number input.
+		secondFormPhone.addEventListener('input', () => {
+			secondFormPhone.value = secondFormPhone.value.replace(/[a-zа-я\s/.,!@#$%^&=*<>":{}|?_~`]/gi, '');
+		});
 	};
 	regularExpression();
 });
