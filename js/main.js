@@ -352,7 +352,6 @@ window.addEventListener('DOMContentLoaded', () => {
 	//RegExp section calc sum.
 	const regularExpression = () => {
 		const calcItem = document.querySelectorAll('input.calc-item');
-		const totalId = document.getElementById('total');
 		const secondFormName = document.getElementById('form2-name');
 		const secondFormMessage = document.getElementById('form2-message');
 		const secondFormEmail = document.getElementById('form2-email');
