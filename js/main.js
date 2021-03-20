@@ -356,13 +356,13 @@ window.addEventListener('DOMContentLoaded', () => {
 		const secondFormName = document.getElementById('form2-name');
 		const secondFormMessage = document.getElementById('form2-message');
 		const secondFormEmail = document.getElementById('form2-email');
+		const secondFormPhone = document.getElementById('form2-phone');
 
 		//Section calc sum.
 		calcItem.forEach(item => {
 			item.addEventListener('input', () => {
-				// let text = item.value;
 
-				totalId.textContent = item.value.replace(/\D/g, '');
+				totalId.textContent = item.value.replace(/[\D/]/g, '');
 			});
 		});
 
@@ -371,7 +371,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 			//Expression name input.
 			secondFormName.addEventListener('input', () => {
-				secondFormName.value = secondFormName.value.replace(/[a-z\d/.,-=()!@#$%^&*_+]/gi, '');
+				secondFormName.value = secondFormName.value.replace(/[a-z\d/.,-=()!@#$%^&*_+<>]/gi, '');
 			});
 
 			//Expression placeholder.
@@ -381,7 +381,11 @@ window.addEventListener('DOMContentLoaded', () => {
 
 			//Expression emain input.
 			secondFormEmail.addEventListener('input', () => {
-				secondFormEmail.value = secondFormEmail.value.replace(/[а-я\s/()]/gi, '');
+				secondFormEmail.value = secondFormEmail.value.replace(/[а-я\s/()<>]/gi, '');
+			});
+			//Expression phone number input.
+			secondFormPhone.addEventListener('input', () => {
+				secondFormPhone.value = secondFormPhone.value.replace(/[a-zа-я\s/.,!@#$%^&=*<>":{}|?_~`]/gi, '');
 			});
 		};
 
