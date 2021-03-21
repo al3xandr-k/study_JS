@@ -365,25 +365,33 @@ window.addEventListener('DOMContentLoaded', () => {
 			});
 		});
 
-		//Expression name input.
-		secondFormName.addEventListener('input', () => {
-			secondFormName.value = secondFormName.value.replace(/[a-z\d/.,:;-=()\]!@#$%^&*_`\[+<>"№?]/gi, '');
-			secondFormName.value = secondFormName.value.slice(0, 1).toUpperCase() + secondFormName.value.slice(1).toLowerCase();
+		secondForm.addEventListener('focusin', (event) => {
+			const target = event.target;
+
+			secondForm.classList.add('focused');
+
+			if (target.closest('#form2-name')) {
+				secondFormName.addEventListener('input', () => {
+					secondFormName.value = secondFormName.value.replace(/[a-z\d/.,:;-=()\]!@#$%^&*_`\[+<>"№?]/gi, '');
+					secondFormName.value = secondFormName.value.trim().slice(0, 1).toUpperCase() + secondFormName.value.trim().slice(1).toLowerCase();
+				});
+			} else if (target.closest('#form2-email')) {
+				secondFormEmail.addEventListener('input', () => {
+					secondFormEmail.value = secondFormEmail.value.replace(/[а-я\s/()<>"'\]!#$%^&*\[:;,+\\?=`~|}{]/gi, '').trim();
+				});
+			} else if (target.closest('#form2-phone')) {
+				secondFormPhone.addEventListener('input', () => {
+					secondFormPhone.value = secondFormPhone.value.replace(/[a-zа-я\s/.,!@#$%^&\]=*<>\["№?:;{}|_~`]/gi, '').trim();
+				});
+			} else if (target.closest('#form2-message')) {
+				secondFormMessage.addEventListener('input', () => {
+					secondFormMessage.value = secondFormMessage.value.replace(/[a-z]/gi, '');
+				});
+			}
 		});
 
-		//Expression emain input.
-		secondFormEmail.addEventListener('input', () => {
-			secondFormEmail.value = secondFormEmail.value.replace(/[а-я\s/()<>"'\]!#$%^&*\[:;,+\\?=`~|}{]/gi, '');
-		});
-
-		//Expression phone number input.
-		secondFormPhone.addEventListener('input', () => {
-			secondFormPhone.value = secondFormPhone.value.replace(/[a-zа-я\s/.,!@#$%^&\]=*<>\["№?:;{}|_~`]/gi, '');
-		});
-
-		//Expression placeholder.
-		secondFormMessage.addEventListener('input', () => {
-			secondFormMessage.value = secondFormMessage.value.replace(/[a-z]/gi, '');
+		secondForm.addEventListener('focusout', () => {
+			secondForm.classList.remove('focused');
 		});
 
 	};
