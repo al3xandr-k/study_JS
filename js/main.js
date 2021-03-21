@@ -356,18 +356,29 @@ window.addEventListener('DOMContentLoaded', () => {
 		const secondFormMessage = document.getElementById('form2-message');
 		const secondFormEmail = document.getElementById('form2-email');
 		const secondFormPhone = document.getElementById('form2-phone');
+		const secondForm = document.getElementById('form2');
 
-		//Section calc sum.
+		//Section calc sum inputs.
 		calcItem.forEach(item => {
 			item.addEventListener('input', () => {
-
 				item.value = item.value.replace(/[\D/]/g, '');
 			});
 		});
 
 		//Expression name input.
 		secondFormName.addEventListener('input', () => {
-			secondFormName.value = secondFormName.value.replace(/[a-z\d/.,-=()!@#$%^&*_+<>]/gi, '');
+			secondFormName.value = secondFormName.value.replace(/[a-z\d/.,:;-=()\]!@#$%^&*_`\[+<>"№?]/gi, '');
+			secondFormName.value = secondFormName.value.slice(0, 1).toUpperCase() + secondFormName.value.slice(1).toLowerCase();
+		});
+
+		//Expression emain input.
+		secondFormEmail.addEventListener('input', () => {
+			secondFormEmail.value = secondFormEmail.value.replace(/[а-я\s/()<>"'\]!#$%^&*\[:;,+\\?=`~|}{]/gi, '');
+		});
+
+		//Expression phone number input.
+		secondFormPhone.addEventListener('input', () => {
+			secondFormPhone.value = secondFormPhone.value.replace(/[a-zа-я\s/.,!@#$%^&\]=*<>\["№?:;{}|_~`]/gi, '');
 		});
 
 		//Expression placeholder.
@@ -375,14 +386,6 @@ window.addEventListener('DOMContentLoaded', () => {
 			secondFormMessage.value = secondFormMessage.value.replace(/[a-z]/gi, '');
 		});
 
-		//Expression emain input.
-		secondFormEmail.addEventListener('input', () => {
-			secondFormEmail.value = secondFormEmail.value.replace(/[а-я\s/()<>]/gi, '');
-		});
-		//Expression phone number input.
-		secondFormPhone.addEventListener('input', () => {
-			secondFormPhone.value = secondFormPhone.value.replace(/[a-zа-я\s/.,!@#$%^&=*<>":{}|?_~`]/gi, '');
-		});
 	};
 	regularExpression();
 });
