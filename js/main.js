@@ -377,7 +377,7 @@ window.addEventListener('DOMContentLoaded', () => {
 				});
 			} else if (target.closest('#form2-email')) {
 				secondFormEmail.addEventListener('input', () => {
-					secondFormEmail.value = secondFormEmail.value.replace(/[а-я\s/()<>"'\]!#$%^&*\[:;,+\\?=`~|}{]/gi, '').trim();
+					secondFormEmail.value = secondFormEmail.value.replace(/[а-я\s/()<>"\]#$%^&\[:;,+\\?=`|}{]/gi, '').trim();
 				});
 			} else if (target.closest('#form2-phone')) {
 				secondFormPhone.addEventListener('input', () => {
