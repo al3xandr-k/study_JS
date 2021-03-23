@@ -354,15 +354,7 @@ window.addEventListener('DOMContentLoaded', () => {
 		const calcItem = document.querySelectorAll('input.calc-item');
 
 		const firstForm = document.getElementById('form1');
-		const firstFormName = document.getElementById('form1-name');
-		const firstFormEmail = document.getElementById('form1-email');
-		const firstFormPhone = document.getElementById('form1-phone');
-
 		const secondForm = document.getElementById('form2');
-		const secondFormName = document.getElementById('form2-name');
-		const secondFormMessage = document.getElementById('form2-message');
-		const secondFormEmail = document.getElementById('form2-email');
-		const secondFormPhone = document.getElementById('form2-phone');
 
 		//Section calc sum inputs.
 		calcItem.forEach(item => {
@@ -377,17 +369,17 @@ window.addEventListener('DOMContentLoaded', () => {
 			firstForm.classList.add('focused');
 
 			if (target.closest('#form1-name')) {
-				firstFormName.addEventListener('input', () => {
-					firstFormName.value = firstFormName.value.replace(/[a-z\d/.,:;-=()\]!@#$%^&*_`\[+<>"№?]/gi, '');
-					firstFormName.value = firstFormName.value.trim().slice(0, 1).toUpperCase() + firstFormName.value.trim().slice(1).toLowerCase();
+				target.addEventListener('input', () => {
+					target.value = target.value.replace(/[a-z\d/.,:;-=()\]!@#$%^&*_`\[+<>"№?]/gi, '');
+					target.value = target.value.trim().slice(0, 1).toUpperCase() + target.value.trim().slice(1).toLowerCase();
 				});
 			} else if (target.closest('#form1-email')) {
-				firstFormEmail.addEventListener('input', () => {
-					firstFormEmail.value = firstFormEmail.value.replace(/[а-я+\s/()<>"\]#$%^&\[:;,+\\?=`|}{]/gi, '').trim();
+				target.addEventListener('input', () => {
+					target.value = target.value.replace(/[а-я+\s/()<>"\]#$%^&\[:;,+\\?=`|}{]/gi, '').trim();
 				});
 			} else if (target.closest('#form1-phone')) {
-				firstFormPhone.addEventListener('input', () => {
-					firstFormPhone.value = firstFormPhone.value.replace(/[a-zа-я\s/.,!@#$%^&\]=*<>\["№?:;{}|_~`]/gi, '').trim();
+				target.addEventListener('input', () => {
+					target.value = target.value.replace(/[a-zа-я\s/.,!@#$%^&\]=*<>\["№?:;{}|_~`]/gi, '').trim();
 				});
 			}
 
@@ -403,21 +395,21 @@ window.addEventListener('DOMContentLoaded', () => {
 			secondForm.classList.add('focused');
 
 			if (target.closest('#form2-name')) {
-				secondFormName.addEventListener('input', () => {
-					secondFormName.value = secondFormName.value.replace(/[a-z\d/.,:;-=()\]!@#$%^&*_`\[+<>"№?]/gi, '');
-					secondFormName.value = secondFormName.value.trim().slice(0, 1).toUpperCase() + secondFormName.value.trim().slice(1).toLowerCase();
+				target.addEventListener('input', () => {
+					target.value = target.value.replace(/[a-z\d/.,:;-=()\]!@#$%^&*_`\[+<>"№?]/gi, '');
+					target.value = target.value.trim().slice(0, 1).toUpperCase() + target.value.trim().slice(1).toLowerCase();
 				});
 			} else if (target.closest('#form2-email')) {
-				secondFormEmail.addEventListener('input', () => {
-					secondFormEmail.value = secondFormEmail.value.replace(/[а-я+\s/()<>"\]#$%^&\[:;,+\\?=`|}{]/gi, '').trim();
+				target.addEventListener('input', () => {
+					target.value = target.value.replace(/[а-я+\s/()<>"\]#$%^&\[:;,+\\?=`|}{]/gi, '').trim();
 				});
 			} else if (target.closest('#form2-phone')) {
-				secondFormPhone.addEventListener('input', () => {
-					secondFormPhone.value = secondFormPhone.value.replace(/[a-zа-я\s/.,!@#$%^&\]=*<>\["№?:;{}|_~`]/gi, '').trim();
+				target.addEventListener('input', () => {
+					target.value = target.value.replace(/[a-zа-я\s/.,!@#$%^&\]=*<>\["№?:;{}|_~`]/gi, '').trim();
 				});
 			} else if (target.closest('#form2-message')) {
-				secondFormMessage.addEventListener('input', () => {
-					secondFormMessage.value = secondFormMessage.value.replace(/[a-z]/gi, '');
+				target.addEventListener('input', () => {
+					target.value = target.value.replace(/[a-z]/gi, '');
 				});
 			}
 		});
@@ -447,8 +439,6 @@ window.addEventListener('DOMContentLoaded', () => {
 			const squareValue = +calcSquare.value;
 			const typeValue = calcType.options[calcType.selectedIndex].value;
 
-
-
 			if (calcCount.value > 1) {
 				countValue += (calcCount.value - 1) / 10;
 			};
@@ -461,8 +451,6 @@ window.addEventListener('DOMContentLoaded', () => {
 
 			if (typeValue && squareValue) {
 				total = price * squareValue * typeValue * countValue * dayValue;
-			} else {
-				total = 0;
 			}
 
 			totalValue.textContent = total;
