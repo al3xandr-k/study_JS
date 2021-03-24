@@ -370,7 +370,7 @@ window.addEventListener('DOMContentLoaded', () => {
 				target.value = target.value.replace(/[a-z\d/.,:;-=()\]!@#$%^&*_`\[+<>"№?]/gi, '');
 				target.value = target.value.trim().slice(0, 1).toUpperCase() + target.value.trim().slice(1).toLowerCase();
 			} else if (target.placeholder === 'E-mail' || target.placeholder === 'Ваш E-mail') {
-				target.value = target.value.replace(/[^A-Za-z!.@_~-'*]/, '').trim();
+				target.value = target.value.replace(/[а-я+\s/()<>"\]#$%^&\[:;,+\\?=`|}{]/gi, '').trim();
 			} else if (target.placeholder === 'Номер телефона' || target.placeholder === "Ваш номер телефона") {
 				target.value = target.value.replace(/[a-zа-я\s/.,!@#$%^&\]=*<>\["№?:;{}|_~`]/gi, '').trim();
 			} else if (target.placeholder === 'Ваше сообщение') {
@@ -385,7 +385,7 @@ window.addEventListener('DOMContentLoaded', () => {
 				target.value = target.value.replace(/[a-z\d/.,:;-=()\]!@#$%^&*_`\[+<>"№?]/gi, '');
 				target.value = target.value.trim().slice(0, 1).toUpperCase() + target.value.trim().slice(1).toLowerCase();
 			} else if (target.placeholder === 'E-mail' || target.placeholder === 'Ваш E-mail') {
-				target.value = target.value.replace(/[^\w\s+@\ -]|(.)(?=\1)/gi, '').trim();
+				target.value = target.value.replace(/[^\w\s+@\-\.]|()(?=\1)/gi, '').trim();
 			} else if (target.placeholder === 'Номер телефона' || target.placeholder === "Ваш номер телефона") {
 				target.value = target.value.replace(/[a-zа-я\s/.,!@#$%^&\]=*<>\["№?:;{}|_~`]/gi, '').trim();
 			} else if (target.placeholder === 'Ваше сообщение') {
