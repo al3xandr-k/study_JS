@@ -1,6 +1,25 @@
 window.addEventListener('DOMContentLoaded', () => {
 	'use strict';
 
+	//Animation.
+	const animate = ({ timing, draw, duration }) => {
+
+		let start = performance.now();
+
+		requestAnimationFrame(function animate(time) {
+			let timeFraction = (time - start) / duration;
+			if (timeFraction > 1) timeFraction = 1;
+
+			let progress = timing(timeFraction);
+
+			draw(progress);
+
+			if (timeFraction < 1) {
+				requestAnimationFrame(animate);
+			}
+		});
+	};
+
 	//Timer.
 	const timer = deadline => {
 		const timerHours = document.querySelector('#timer-hours');
@@ -117,26 +136,6 @@ window.addEventListener('DOMContentLoaded', () => {
 		btnPopUp.forEach(elem => {
 			elem.addEventListener('click', () => {
 				popUp.style.display = 'block';
-
-				//PopUp animation.
-				function animate({ timing, draw, duration }) {
-
-					let start = performance.now();
-
-					requestAnimationFrame(function animate(time) {
-						let timeFraction = (time - start) / duration;
-						if (timeFraction > 1) timeFraction = 1;
-
-						let progress = timing(timeFraction);
-
-						draw(progress);
-
-						if (timeFraction < 1) {
-							requestAnimationFrame(animate);
-						}
-
-					});
-				}
 
 				if (window.screen.width > 768) {
 					animate({
@@ -428,8 +427,7 @@ window.addEventListener('DOMContentLoaded', () => {
 		const calcSquare = document.querySelector('.calc-square');
 		const calcCount = document.querySelector('.calc-count');
 		const calcDay = document.querySelector('.calc-day');
-		const totalValue = document.getElementById('total');
-
+		let totalValue = document.getElementById('total');
 
 		const countSum = () => {
 			let total = 0;
@@ -451,9 +449,17 @@ window.addEventListener('DOMContentLoaded', () => {
 
 			if (typeValue && squareValue) {
 				total = price * squareValue * typeValue * countValue * dayValue;
-			}
+			};
 
-			totalValue.textContent = Math.floor(total);
+			animate({
+				duration: 2000,
+				timing(timeFraction) {
+					return timeFraction;
+				},
+				draw(progress) {
+					totalValue.textContent = Math.floor(progress * total);
+				}
+			});
 		};
 
 		calcBlock.addEventListener('change', (event) => {
@@ -465,5 +471,5 @@ window.addEventListener('DOMContentLoaded', () => {
 		});
 	};
 
-	calc(100);
+	calc();
 });
