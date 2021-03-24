@@ -156,15 +156,24 @@ window.addEventListener('DOMContentLoaded', () => {
 		});
 
 		popUp.addEventListener('click', (event) => {
+			const form3Name = document.getElementById('form3-name');
+			const form3Phone = document.getElementById('form3-phone');
+			const form3Email = document.getElementById('form3-email');
+
 			let target = event.target;
 
 			if (target.classList.contains('popup-close')) {
 				popUp.style.display = 'none';
+				form3Name.value = '';
+				form3Phone.value = '';
+				form3Email.value = '';
 			} else {
 				target = target.closest('.popup-content');
-
 				if (!target) {
 					popUp.style.display = 'none';
+					form3Name.value = '';
+					form3Phone.value = '';
+					form3Email.value = '';
 				};
 			};
 		});
@@ -351,9 +360,6 @@ window.addEventListener('DOMContentLoaded', () => {
 	//RegExp section calc sum.
 	const regularExpression = () => {
 		const calcItem = document.querySelectorAll('input.calc-item');
-
-		const firstForm = document.getElementById('form1');
-		const secondForm = document.getElementById('form2');
 		const body = document.querySelector('body');
 
 		//Section calc sum inputs.
