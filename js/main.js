@@ -453,5 +453,6 @@ window.addEventListener('DOMContentLoaded', () => {
 		});
 	};
 
+	
 	calc();
 });
