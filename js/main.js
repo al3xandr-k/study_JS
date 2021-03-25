@@ -372,33 +372,32 @@ window.addEventListener('DOMContentLoaded', () => {
 		body.addEventListener('input', (event) => {
 			const target = event.target;
 
-			if (target.placeholder === 'Ваше имя') {
+			if (target.name === 'user_name') {
 				target.value = target.value.replace(/[a-z\d/.,:;-=()\]!@#$%^&*_`\[+<>"№?]/gi, '');
 				target.value = target.value.trim().slice(0, 1).toUpperCase() + target.value.trim().slice(1).toLowerCase();
-			} else if (target.placeholder === 'E-mail' || target.placeholder === 'Ваш E-mail') {
+			} else if (target.name === 'user_email') {
 				target.value = target.value.replace(/[а-я+\s+/()<>"\]#$%^&\[:;,\s+\\?=`|}{]/gi, '');
-			} else if (target.placeholder === 'Номер телефона' || target.placeholder === "Ваш номер телефона") {
+			} else if (target.name === 'user_phone') {
 				target.value = target.value.replace(/[a-zа-я\s/.,!@#$%^&\]=*<>\["№?:;{}|_~`]/gi, '').trim();
-			} else if (target.placeholder === 'Ваше сообщение') {
+			} else if (target.name === 'user_message') {
 				target.value = target.value.replace(/[a-z]/gi, '');
-			}
+			};
 		});
 
 		body.addEventListener('focusout', (event) => {
 			const target = event.target;
 
-			if (target.placeholder === 'Ваше имя') {
+			if (target.name === 'user_name') {
 				target.value = target.value.replace(/[a-z\d/.,:;-=()\]!@#$%^&*_`\[+<>"№?]/gi, '');
 				target.value = target.value.trim().slice(0, 1).toUpperCase() + target.value.trim().slice(1).toLowerCase();
-			} else if (target.placeholder === 'E-mail' || target.placeholder === 'Ваш E-mail') {
+			} else if (target.name === 'user_email') {
 				target.value = target.value.replace(/[^\w\s+/@\-\.]|()(?=\1)/gi, '');
-			} else if (target.placeholder === 'Номер телефона' || target.placeholder === "Ваш номер телефона") {
+			} else if (target.name === 'user_phone') {
 				target.value = target.value.replace(/[a-zа-я\s/.,!@#$%^&\]=*<>\["№?:;{}|_~`]/gi, '').trim();
-			} else if (target.placeholder === 'Ваше сообщение') {
+			} else if (target.name === 'user_message') {
 				target.value = target.value.replace(/[a-z]/gi, '');
-			}
+			};
 		});
-
 	};
 	regularExpression();
 
@@ -453,6 +452,6 @@ window.addEventListener('DOMContentLoaded', () => {
 		});
 	};
 
-	
+
 	calc();
 });
