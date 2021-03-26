@@ -115,11 +115,11 @@ class Validator {
   setPattern() {
 
     if (!this.pattern.user_name) {
-      this.pattern.user_name = /^[а-яА-Я]+$/;
+      this.pattern.user_name = /^$/;
     };
 
     if (!this.pattern.user_message) {
-      this.pattern.user_message = /[a-z]/;
+      this.pattern.user_message = /^$/;
     };
   };
 };
