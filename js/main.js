@@ -399,7 +399,7 @@ window.addEventListener('DOMContentLoaded', () => {
 			};
 		});
 	};
-	regularExpression();
+	//regularExpression();
 
 	//Calculator
 	const calc = (price = 100) => {

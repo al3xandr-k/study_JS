@@ -8,8 +8,6 @@ class Validator {
       return item.name !== 'user_email' && item.name !== 'user_phone' && item !== item.closest('.calc-item') && item.tagName.toLowerCase() !== 'button' && item.type !== 'button';
     });
     this.error = new Set();
-
-    console.log(this.form);
   };
 
   init() {
@@ -17,14 +15,16 @@ class Validator {
     this.setPattern();
     this.elementsInput.forEach(elem => elem.addEventListener('change', this.checkIt.bind(this)));
 
-    //кнопка подтвердить всё равно обновляет страницу. 
-    this.form.addEventListener('submit', (event) => {
-      this.elementsInput.forEach(elem => this.checkIt({ target: elem }));
+    this.form.forEach(item => {
+      item.addEventListener('submit', (event) => {
+        this.elementsInput.forEach(elem => this.checkIt({ target: elem }));
 
-      if (this.error.size) {
-        event.preventDefault();
-      };
+        if (this.error.size) {
+          event.preventDefault();
+        };
+      });
     });
+
   };
 
   isValid(elem) {
@@ -65,6 +65,10 @@ class Validator {
   };
 
   showError(elem) {
+    if (elem.nextElementSibling) {
+      elem.nextElementSibling.remove();
+    }
+
     const errorDiv = document.createElement('div');
     errorDiv.textContent = 'Ошибка в этом поле';
     errorDiv.classList.add('validator-error');
@@ -111,7 +115,7 @@ class Validator {
   setPattern() {
 
     if (!this.pattern.user_name) {
-      this.pattern.user_name = /[а-z\d/.,:;-=()\]!@#$%^&*_`\[+<>"№?]/;
+      this.pattern.user_name = /^[а-яА-Я]+$/;
     };
 
     if (!this.pattern.user_message) {
@@ -123,8 +127,8 @@ class Validator {
 const valid = new Validator({
   input: 'input',
   pattern: {
-    user_name: /^[a-zA-Z]$/,
-    user_message: /^[a-z]$/
+    user_name: /^[а-яА-Я]+$/,
+    user_message: /^[а-яА-Я]+$/
   },
   method: {
     'user_name': [
