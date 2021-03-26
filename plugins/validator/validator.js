@@ -16,6 +16,8 @@ class Validator {
     this.applyStyle();
     this.setPattern();
     this.elementsInput.forEach(elem => elem.addEventListener('change', this.checkIt.bind(this)));
+
+    //кнопка подтвердить всё равно обновляет страницу. 
     this.form.addEventListener('submit', (event) => {
       this.elementsInput.forEach(elem => this.checkIt({ target: elem }));
 
