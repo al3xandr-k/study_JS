@@ -3,16 +3,26 @@ class Validator {
     this.input = document.querySelectorAll(input);
     this.pattern = pattern;
     this.method = method;
+    this.form = document.querySelectorAll('form');
     this.elementsInput = [...this.input].filter(item => {
       return item.name !== 'user_email' && item.name !== 'user_phone' && item !== item.closest('.calc-item') && item.tagName.toLowerCase() !== 'button' && item.type !== 'button';
     });
     this.error = new Set();
+
+    console.log(this.form);
   };
 
   init() {
     this.applyStyle();
     this.setPattern();
     this.elementsInput.forEach(elem => elem.addEventListener('change', this.checkIt.bind(this)));
+    this.form.addEventListener('submit', (event) => {
+      this.elementsInput.forEach(elem => this.checkIt({ target: elem }));
+
+      if (this.error.size) {
+        event.preventDefault();
+      };
+    });
   };
 
   isValid(elem) {
@@ -28,11 +38,16 @@ class Validator {
       }
     };
 
-    const method = this.method[elem.id]; //здесь не массив а undefined
+    if (this.method) {
+      const method = this.method[elem.name];
+      if (method) {
+        return method.every(item => validatorMethod[item[0]](elem, this.pattern[item[1]]));
+      };
+    } else {
+      console.warn('Необходимо передать user_name полей ввода и методы проверки этих полей для работы валидатора!');
+    }
 
-    console.log('method: ', method);
-
-    return true; //при значении true ошибка.
+    return true;
   };
 
   checkIt(event) {
@@ -54,7 +69,7 @@ class Validator {
 
     elem.insertAdjacentElement('afterend', errorDiv);
 
-    if (elem.nextElementSibling.classList.contains('validator-error')) {
+    if (elem.nextElementSibling && elem.nextElementSibling.classList.contains('validator-error')) {
       return;
     };
 
@@ -66,9 +81,7 @@ class Validator {
     elem.classList.remove('error');
     elem.classList.add('success');
 
-    //тут ошибка когда значение isValid - return true;
-
-    if (elem.nextElementSibling.classList.contains('validator-error')) {
+    if (elem.nextElementSibling && elem.nextElementSibling.classList.contains('validator-error')) {
       elem.nextElementSibling.remove();
     };
   };
@@ -96,11 +109,11 @@ class Validator {
   setPattern() {
 
     if (!this.pattern.user_name) {
-      this.pattern.user_name = /^[a-z\d/.,:;-=()\]!@#$%^&*_`\[+<>"№?]$/;
+      this.pattern.user_name = /[а-z\d/.,:;-=()\]!@#$%^&*_`\[+<>"№?]/;
     };
 
     if (!this.pattern.user_message) {
-      this.pattern.user_message = /^[a-z]$/;
+      this.pattern.user_message = /[a-z]/;
     };
   };
 };
@@ -108,7 +121,7 @@ class Validator {
 const valid = new Validator({
   input: 'input',
   pattern: {
-    user_name: /[a-zA-Z]/,
+    user_name: /^[a-zA-Z]$/,
     user_message: /^[a-z]$/
   },
   method: {
@@ -124,11 +137,3 @@ const valid = new Validator({
 });
 
 valid.init();
-
-
-
-
-
-    // if (item.name === 'user_name' && item.name === 'user_message') {
-    //   item.replace(/^[a-z]$/, gi);
-    // };
