@@ -374,13 +374,13 @@ window.addEventListener('DOMContentLoaded', () => {
 
 			if (target.name === 'user_name') {
 				target.value = target.value.replace(/[a-z\d/.,:;-=()\]!@#$%^&*_`\[+<>"№?]/gi, '');
-				target.value = target.value.trim().slice(0, 1).toUpperCase() + target.value.trim().slice(1).toLowerCase();
+				target.value = target.value.slice(0, 1).toUpperCase() + target.value.slice(1).toLowerCase();
 			} else if (target.name === 'user_email') {
 				target.value = target.value.replace(/[а-я+\s+/()<>"\]#$%^&\[:;,\s+\\?=`|}{]/gi, '');
 			} else if (target.name === 'user_phone') {
-				target.value = target.value.replace(/[a-zа-я\s/.,!@#$%^&\]=*<>\["№?:;{}|_~`]/gi, '').trim();
+				target.value = target.value.replace(/[a-zа-я\s/.,!@#$%^&\]=*<>\["№?:\-\\;{}|_~`]/gi, '').trim();
 			} else if (target.name === 'user_message') {
-				target.value = target.value.replace(/[a-z]/gi, '');
+				target.value = target.value.replace(/[a-z!@#$^%*()_+}{|:"?><&]/gi, '');
 			};
 		});
 
@@ -399,7 +399,7 @@ window.addEventListener('DOMContentLoaded', () => {
 			};
 		});
 	};
-	//regularExpression();
+	regularExpression();
 
 	//Calculator
 	const calc = (price = 100) => {
@@ -451,7 +451,68 @@ window.addEventListener('DOMContentLoaded', () => {
 			};
 		});
 	};
-
-
 	calc();
+
+	//Send ajax-form
+	const sendForm = () => {
+		const errorMessage = 'Что то пошло не так...';
+		const loadMessage = 'Загрузка...';
+		const successMessage = 'Ваша заявка отправлена! Мы с вами свядемся!';
+
+		const form = document.querySelectorAll('form');
+		const statusMessage = document.createElement('div');
+
+		form.forEach(item => {
+			item.addEventListener('submit', (event) => {
+				event.preventDefault();
+
+				item.append(statusMessage);
+
+				statusMessage.textContent = loadMessage;
+
+				const formData = new FormData(item);
+				let body = {};
+
+				formData.forEach((value, key) => {
+					body[key] = value;
+				});
+
+				postData(body, () => {
+					statusMessage.textContent = successMessage;
+				}, (error) => {
+					statusMessage.textContent = errorMessage;
+					console.error(error);
+				});
+			});
+		});
+
+		const postData = (body, outputData, errorData) => {
+			const request = new XMLHttpRequest();
+
+			request.addEventListener('readystatechange', () => {
+
+				if (request.readyState !== 4) {
+					return;
+				};
+
+				if (request.status === 200) {
+					outputData();
+					setTimeout(() => {
+						form.forEach(item => {
+							item.reset();
+						});
+
+						statusMessage.textContent = '';
+					}, 2000);
+				} else {
+					errorData(request.status);
+				};
+			});
+
+			request.open('POST', './server.php');
+			request.setRequestHeader('Content-Type', 'application/json');
+			request.send(JSON.stringify(body));
+		};
+	};
+	sendForm();
 });
