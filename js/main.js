@@ -456,11 +456,14 @@ window.addEventListener('DOMContentLoaded', () => {
 	//Send ajax-form
 	const sendForm = () => {
 		const errorMessage = 'Что то пошло не так...';
-		const loadMessage = 'Загрузка...';
-		const successMessage = 'Ваша заявка отправлена! Мы с вами свядемся!';
+		// const loadMessage = 'Загрузка...';
+		const successMessage = 'Ваша заявка отправлена! Мы с вами свяжемся!';
 
 		const form = document.querySelectorAll('form');
 		const statusMessage = document.createElement('div');
+
+		const inputs = document.querySelectorAll('input');
+		console.log('inputs: ', inputs);
 
 		form.forEach(item => {
 			item.addEventListener('submit', (event) => {
@@ -468,7 +471,9 @@ window.addEventListener('DOMContentLoaded', () => {
 
 				item.append(statusMessage);
 
-				statusMessage.textContent = loadMessage;
+				//pre Loader
+				const preloader = document.querySelector('.preloader');
+				preloader.style.display = 'block';
 
 				const formData = new FormData(item);
 				let body = {};
@@ -478,7 +483,16 @@ window.addEventListener('DOMContentLoaded', () => {
 				});
 
 				postData(body, () => {
-					statusMessage.textContent = successMessage;
+					setTimeout(() => {
+						preloader.style.display = 'none';
+
+						form.forEach(item => {
+							item.reset();
+						});
+
+						statusMessage.textContent = successMessage;
+						statusMessage.style.color = '#fff';
+					}, 3000);
 				}, (error) => {
 					statusMessage.textContent = errorMessage;
 					console.error(error);
@@ -497,13 +511,16 @@ window.addEventListener('DOMContentLoaded', () => {
 
 				if (request.status === 200) {
 					outputData();
-					setTimeout(() => {
-						form.forEach(item => {
-							item.reset();
-						});
 
+					setTimeout(() => {
 						statusMessage.textContent = '';
-					}, 2000);
+					}, 6000);
+
+					setTimeout(() => {
+						const popup = document.querySelector('.popup');
+						popup.style.display = 'none';
+					}, 6500);
+
 				} else {
 					errorData(request.status);
 				};
