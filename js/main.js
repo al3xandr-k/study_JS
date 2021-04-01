@@ -504,20 +504,19 @@ window.addEventListener('DOMContentLoaded', () => {
 
 					statusMessage.textContent = successMessage;
 					statusMessage.style.color = '#fff';
-				}, 3000)
+				}, 3000);
 
-				postData(body);
 
-				Promise.all()
-				.then(out)
-				.catch((error) => {
-					statusMessage.textContent = errorMessage;
-					console.error(error);
-				});
+				Promise.all(postData(body))
+					.then(out)
+					.catch((error) => {
+						statusMessage.textContent = errorMessage;
+						console.error(error);
+					});
 			});
 		});
 
-		const postData = (body, outputData, errorData) => {
+		const postData = (body) => {
 			const request = new XMLHttpRequest();
 			return new Promise((resolve, reject) => {
 				request.addEventListener('readystatechange', () => {
@@ -528,8 +527,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 					if (request.status === 200) {
 
-						resolve(outputData());
-						//outputData();
+						resolve();
 
 						setTimeout(() => {
 							statusMessage.textContent = '';
@@ -541,7 +539,7 @@ window.addEventListener('DOMContentLoaded', () => {
 						}, 6500);
 
 					} else {
-						reject(errorData(request.status));
+						reject(request.status);
 						//errorData(request.status);
 					};
 				});
