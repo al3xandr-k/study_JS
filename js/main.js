@@ -479,37 +479,32 @@ window.addEventListener('DOMContentLoaded', () => {
 					body[key] = value;
 				});
 
-				// postData(body, () => {
-				// 	setTimeout(() => {
-				// 		preloader.style.display = 'none';
+				postData(body)
+					.then(() => {
+						setTimeout(() => {
+							preloader.style.display = 'none';
 
-				// 		form.forEach(item => {
-				// 			item.reset();
-				// 		});
+							form.forEach(item => {
+								item.reset();
+							});
 
-				// 		statusMessage.textContent = successMessage;
-				// 		statusMessage.style.color = '#fff';
-				// 	}, 3000);
-				// }, (error) => {
-				// 	statusMessage.textContent = errorMessage;
-				// 	console.error(error);
-				// });
+							statusMessage.textContent = successMessage;
+							statusMessage.style.color = '#fff';
+						}, 3000);
 
-				let out = setTimeout(() => {
-					preloader.style.display = 'none';
+						setTimeout(() => {
+							statusMessage.textContent = '';
+						}, 5000);
 
-					form.forEach(item => {
-						item.reset();
+						setTimeout(() => {
+							const popup = document.querySelector('.popup');
+							popup.style.display = 'none';
+						}, 5500);
+					})
+					.catch((error) => {
+						statusMessage.textContent = errorMessage;
+						console.error(error);
 					});
-
-					statusMessage.textContent = successMessage;
-					statusMessage.style.color = '#fff';
-				}, 3000);
-
-
-				Promise.all(postData(body))
-					.then(out)
-					.catch(() => statusMessage.textContent = errorMessage);
 			});
 		});
 
@@ -523,21 +518,9 @@ window.addEventListener('DOMContentLoaded', () => {
 					};
 
 					if (request.status === 200) {
-
 						resolve();
-
-						setTimeout(() => {
-							statusMessage.textContent = '';
-						}, 6000);
-
-						setTimeout(() => {
-							const popup = document.querySelector('.popup');
-							popup.style.display = 'none';
-						}, 6500);
-
 					} else {
 						reject(request.status);
-						//errorData(request.status);
 					};
 				});
 
@@ -546,7 +529,6 @@ window.addEventListener('DOMContentLoaded', () => {
 				request.send(JSON.stringify(body));
 			});
 		};
-
 
 	};
 	sendForm();
