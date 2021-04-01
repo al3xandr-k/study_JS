@@ -509,7 +509,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 				Promise.all(postData(body))
 					.then(out)
-					.catch(error => console.error(error.textContent = errorMessage));
+					.catch(() => statusMessage.textContent = errorMessage);
 			});
 		});
 
