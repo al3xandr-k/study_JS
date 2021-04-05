@@ -1,3 +1,5 @@
+import animate from './animate';
+
 const togglePopUp = () => {
   const popUp = document.querySelector('.popup');
   const btnPopUp = document.querySelectorAll('.popup-btn');

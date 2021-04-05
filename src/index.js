@@ -12,7 +12,7 @@ import calc from './modules/calc';
 import sendForm from './modules/sendForm';
 
 //Timer.
-timer('2021-03-17');
+timer('2021-04-09');
 
 //Smooth scroll to section.
 smoothScroll();
