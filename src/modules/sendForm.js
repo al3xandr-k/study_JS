@@ -5,26 +5,34 @@ const sendForm = () => {
 
   const form = document.querySelectorAll('form');
   const statusMessage = document.createElement('div');
+  const input = document.querySelectorAll('input');
+
 
   form.forEach(item => {
     item.addEventListener('submit', (event) => {
       event.preventDefault();
 
-      item.append(statusMessage);
-
       //pre Loader
       const preloader = document.querySelector('.preloader');
+      const formData = new FormData(item);
+      const body = {};
+
       preloader.style.display = 'block';
 
-      const formData = new FormData(item);
+      item.append(statusMessage);
 
-      postData(formData)
-        .then((response) => {
-          if (response.status !== 200) {
-            throw new Error('status network not 200.');
-          }
+      formData.forEach((value, key) => {
+        body[key] = value
+      });
 
+      postData(body)
+        .then(() => {
           setTimeout(() => {
+            (response) => {
+              if (response.status !== 200) {
+                throw new Error('status network not 200.');
+              }
+            }
             preloader.style.display = 'none';
 
             form.forEach(item => {
@@ -51,13 +59,13 @@ const sendForm = () => {
     });
   });
 
-  const postData = (formData) => {
+  const postData = (body) => {
     return fetch('./server.php', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: formData
+      body: JSON.stringify(body)
     })
   };
 };
