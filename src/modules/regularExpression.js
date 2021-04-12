@@ -13,25 +13,43 @@ const regularExpression = () => {
     const target = event.target;
 
     if (target.name === 'user_name') {
-      target.value = target.value.replace(/[a-z\d/.,:;-=()\]!@#$%^&*_`\[+<>"№?]/gi, '');
+      target.value = target.value.replace(/^[a-z]{20}$/gi, '');
       target.value = target.value.slice(0, 1).toUpperCase() + target.value.slice(1).toLowerCase();
     } else if (target.name === 'user_email') {
-      target.value = target.value.replace(/[а-я+\s+/()<>"\]#$%^&\[:;,\s+\\?=`|}{]/gi, '');
+      target.value = target.value.replace(/^[а-яё0-9\-_.]{2,30}@[а-яё]{2,10}\.[а-яё]{2,5}$/gi, '');
     } else if (target.name === 'user_phone') {
-      target.value = target.value.replace(/[a-zа-я\s/.,!@#$%^&\]=*<>\["№?:\-\\;{}|_~`]/gi, '').trim();
+      target.value = target.value.replace(/^[\+]?[0-9]{12}/gi, '').trim();
     } else if (target.name === 'user_message') {
-      target.value = target.value.replace(/[a-z!@#$^%*()_+}{|:"?><&]/gi, '');
+      target.value = target.value.replace(/[а-яё0-9.,:!?;\-]/gi, '');
     };
   });
 
   body.addEventListener('focusout', (event) => {
     const target = event.target;
 
+    const allBtnForms = document.querySelectorAll('.form-btn');
+
+    const btnSubmit = (boolean) => {
+      allBtnForms.forEach(item => {
+        item.disabled = boolean
+      });
+    };
+
+    if (target.type === 'tel') {
+      if (target.value.length < 7 || target.value.length > 12) {
+        btnSubmit(true);
+      };
+    } else if (target.type === 'text') {
+      if (target.value.length < 2) {
+        btnSubmit(true);
+      };
+    };
+
     if (target.name === 'user_name') {
       target.value = target.value.replace(/[a-z\d/.,:;-=()\]!@#$%^&*_`\[+<>"№?]/gi, '');
       target.value = target.value.trim().slice(0, 1).toUpperCase() + target.value.trim().slice(1).toLowerCase();
     } else if (target.name === 'user_email') {
-      target.value = target.value.replace(/[^\w\s+/@\-\.]|()(?=\1)/gi, '');
+      target.value = target.value.replace(/[^\w\s+/@\-\.]|()(?=\!)/gi, '');
     } else if (target.name === 'user_phone') {
       target.value = target.value.replace(/[a-zа-я\s/.,!@#$%^&\]=*<>\["№?:;{}|_~`]/gi, '').trim();
     } else if (target.name === 'user_message') {

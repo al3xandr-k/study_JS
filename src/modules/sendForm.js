@@ -5,8 +5,6 @@ const sendForm = () => {
 
   const form = document.querySelectorAll('form');
   const statusMessage = document.createElement('div');
-  const input = document.querySelectorAll('input');
-
 
   form.forEach(item => {
     item.addEventListener('submit', (event) => {
@@ -22,7 +20,7 @@ const sendForm = () => {
       item.append(statusMessage);
 
       formData.forEach((value, key) => {
-        body[key] = value
+        body[key] = value;
       });
 
       postData(body)
