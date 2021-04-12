@@ -13,14 +13,14 @@ const regularExpression = () => {
     const target = event.target;
 
     if (target.name === 'user_name') {
-      target.value = target.value.replace(/^[a-z]{20}$/gi, '');
-      target.value = target.value.slice(0, 1).toUpperCase() + target.value.slice(1).toLowerCase();
+      target.value = target.value.replace(/[a-z\d/.,:;-=()\]!@#$%^&*_`\[+<>"№?]/gi, '');
+      target.value = target.value.trim().slice(0, 1).toUpperCase() + target.value.trim().slice(1).toLowerCase();
     } else if (target.name === 'user_email') {
-      target.value = target.value.replace(/^[а-яё0-9\-_.]{2,30}@[а-яё]{2,10}\.[а-яё]{2,5}$/gi, '');
+      target.value = target.value.replace(/[^\w\s+/@\-\.]|()(?=\!)/gi, '');
     } else if (target.name === 'user_phone') {
-      target.value = target.value.replace(/^[\+]?[0-9]{12}/gi, '').trim();
+      target.value = target.value.replace(/[a-zа-я\s/.,!@#$%^&\]=*<>\["№?:;{}|_~`]/gi, '').trim();
     } else if (target.name === 'user_message') {
-      target.value = target.value.replace(/[а-яё0-9.,:!?;\-]/gi, '');
+      target.value = target.value.replace(/[a-z]/gi, '');
     };
   });
 
