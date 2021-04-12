@@ -10,7 +10,7 @@ import photoTeam from './modules/photoTeam';
 import regularExpression from './modules/regularExpression';
 import calc from './modules/calc';
 import sendForm from './modules/sendForm';
-// import carousel from './modules/sliderCarousel';
+import carousel from './modules/sliderCarousel';
 
 //Timer.
 timer('2021-04-09');
@@ -43,4 +43,4 @@ calc();
 sendForm();
 
 //slider Carusel
-// carousel.init();
+carousel.init();

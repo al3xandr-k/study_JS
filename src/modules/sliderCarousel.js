@@ -188,4 +188,4 @@ const carousel = new SliderCarousel({
   }]
 });
 
-// export default carousel;
+export default carousel;
