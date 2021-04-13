@@ -55,23 +55,21 @@ class SliderCarousel {
     };
 
     style.textContent = `
-      .glo-slider {
-        position: relative !important;
-        overflow: hidden !important;
-      };
-
-      .glo-slider__wrap {
-        display: flex !important;
-        transition: transform 0.5s !important;
-        will-change: transform !important;
-      };
-
-      .glo-slider__item {
-        display: flex !important;
-        aling-items: center !important;
-        flex: 0 0 ${this.options.widthSlide}% !important;
-        margin: auto 0 !important;
-      };
+    .glo-slider {
+      overflow: hidden !important;
+    };
+    .glo-slider__wrap {
+      display: flex !important;
+      transition: transform .5s !important;
+      will-change: transform !important;
+    }
+    .glo-slider__item {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      flex: 0 0 ${this.options.widthSlide}% !important;
+      margin: auto 0 !important;
+    }
     `;
 
     document.head.append(style);
@@ -119,21 +117,25 @@ class SliderCarousel {
     const style = document.createElement('style');
 
     style.textContent = `
-      .glo-slider__next,
-      .glo-slider__prev {
-        margin: 0 10px !important;
-        border: 20px solid #19b5fe !important;
-        border-radius: 50% !important;
-        background: transparent !important;
-      };
-
-      .glo-slider__next:hover,
-      .glo-slider__prev:hover,
-      .glo-slider__next:focus,
-      .glo-slider__prev:focus {
-        background: transparent !important;
-        outline: none !important;
-      };
+    .glo-slider__prev,
+    .glo-slider__next {
+        margin: 0 10px;
+        border: 20px solid transparent;
+        background: transparent;
+    }
+    .glo-slider__prev {
+        border-right-color: #19b5fe;
+    }
+    .glo-slider__next {
+        border-left-color: #19b5fe;
+    }
+    .glo-slider__prev:hover,
+    .glo-slider__next:hover,
+    .glo-slider__prev:focus,
+    .glo-slider__next:focus {
+        background: transparent;
+        outline: none;
+    }
     `;
     document.head.append(style);
   };
@@ -143,6 +145,11 @@ class SliderCarousel {
     const allResponse = this.responsive.map(item => item.breakpoint);
     const maxResponse = Math.max(...allResponse);
 
+    const slideResponse = () => {
+      this.options.widthSlide = Math.floor(100 / this.slidesToShow);
+      this.addStyle();
+    };
+
     const checkResponse = () => {
       const widthWindow = document.documentElement.clientWidth;
 
@@ -150,17 +157,14 @@ class SliderCarousel {
         for (let i = 0; i < allResponse.length; i++) {
           if (widthWindow < allResponse[i]) {
             this.slidesToShow = this.responsive[i].slideToShow;
-            this.options.widthSlide = Math.floor(100 / this.slidesToShow);
-            this.addStyle();
+            slideResponse();
           };
         };
       } else {
         this.slidesToShow = slidesToShowDefault;
-        this.options.widthSlide = Math.floor(100 / this.slidesToShow);
-        this.addStyle();
+        slideResponse();
       };
     };
-
     checkResponse();
 
     window.addEventListener('resize', checkResponse);
