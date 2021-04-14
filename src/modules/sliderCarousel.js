@@ -72,6 +72,8 @@ class SliderCarousel {
     }
     `;
 
+    this.wrap.style.display = 'flex';
+
     document.head.append(style);
   };
 
