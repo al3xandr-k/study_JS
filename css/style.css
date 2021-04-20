@@ -728,6 +728,10 @@ hr.white {
 	}
 }
 
+@media only screen and (max-width: 767px) { 
+
+}
+
 @media only screen and (min-width: 768px) {
 	.modal {
 		padding: 55px 40px 40px;
@@ -930,8 +934,8 @@ video#video_background {
 		height: 520px;
 	}
 	.top-slider .table {
-		/* opacity: 0;
-		visibility: hidden; */
+		opacity: 0;
+		visibility: hidden;
 		-webkit-transform: scale(1.5);
 		-ms-transform: scale(1.5);
 		-o-transform: scale(1.5);

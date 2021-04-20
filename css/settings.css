@@ -606,7 +606,7 @@ img.right{
 }
 ::-webkit-scrollbar-button {
     background-image: url('');
-    background-repat: no-repeat;
+    background-repeat: no-repeat;
     width: 9px;
     height: 0px;
 }
