@@ -727,8 +727,6 @@ hr.white {
 		padding-top: 30px;
 	}
 }
-@media only screen and (max-width: 767px) {
-}
 
 @media only screen and (min-width: 768px) {
 	.modal {
@@ -927,13 +925,13 @@ video#video_background {
 @media only screen and (min-width: 992px) {
 	.top-slider .item {
 		height: 520px;
-	}
+	} 
 	.top-slider {
 		height: 520px;
 	}
 	.top-slider .table {
-		opacity: 0;
-		visibility: hidden;
+		/* opacity: 0;
+		visibility: hidden; */
 		-webkit-transform: scale(1.5);
 		-ms-transform: scale(1.5);
 		-o-transform: scale(1.5);
@@ -943,7 +941,7 @@ video#video_background {
 		transition: 0.5s;
 	}
 	.top-slider .table.active {
-		webkit-transform: scale(1);
+		-webkit-transform: scale(1);
 		-ms-transform: scale(1);
 		-o-transform: scale(1);
 		transform: scale(1);
