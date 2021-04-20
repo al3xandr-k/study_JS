@@ -1162,6 +1162,7 @@ video#video_background {
 	-webkit-transform: scale(1.2);
 	-moz-transform: scale(1.2);
 	-o-transform: scale(1.2);
+	transform: scale(1.2);
 }
 .services-elements .title-h5 {
 	overflow: hidden;
