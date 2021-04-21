@@ -4,6 +4,11 @@
 @import url(jquery.fancybox.css);
 @import url(lightgallery.min.css);
 @import url(settings.css);
+
+html {
+  scroll-behavior: smooth;
+}
+
 body {
 	font-size: 16px;
 	line-height: 1.6;

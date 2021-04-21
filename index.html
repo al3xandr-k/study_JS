@@ -15,7 +15,7 @@
 	<link rel="icon" type="image/png" href="favicon.png" />
 
 	<!-- STYLESHEETS :: FONTS -->
-	<script src="js/main.js" defer></script>
+	<script src="./dist/bundle.js" defer></script>
 	<link
 		href='https://fonts.googleapis.com/css?family=Open+Sans:600,400,300,400italic,600,700,700italic,800&subset=latin,cyrillic'
 		rel='stylesheet' type='text/css'>
@@ -631,11 +631,11 @@
 		<div class="rf">
 			<form action="" name="form-callback">
 				<div class="form-group">
-					<input type="text" name="fio" class="form-control" placeholder="Ваше имя" />
+					<input type="text" name="fio" class="form-control required" placeholder="Ваше имя"/>
 				</div>
 
 				<div class="form-group">
-					<input type="text" name="tel" class="form-control tel required" placeholder="Телефон*" />
+					<input type="text" name="tel" class="form-control tel required" placeholder="Телефон*"/>
 				</div>
 				<p><span class="red">*</span> <span class="f12">- поля, обязательные для заполнения</span></p>
 				<div>
@@ -652,7 +652,7 @@
 		<div class="title-h2">Форма обратной связи</div>
 		<br />
 		<div class="rf">
-			<form action="" name="form-feedback">
+			<form action="" id="callback-form" name="form-feedback">
 				<div class="form-group">
 					<input type="text" name="fio" class="form-control" placeholder="Ваше имя" />
 				</div>
