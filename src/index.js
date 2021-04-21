@@ -5,7 +5,7 @@ import topSliderScroll from './modules/topSliderScroll'
 import carousel from './modules/sliderCarousel'
 import serviceCarousel from './modules/serviceCarousel'
 import buttonServicesModal from './modules/buttonServicesModal'
-import accorion from './modules/accorion'
+import accordion from './modules/accordion'
 import buttonScrollTop from './modules/buttonScrollTop'
 import regularExpression from './modules/regularExpression'
 import sendForm from './modules/sendForm'
@@ -25,8 +25,8 @@ carousel.init()
 //Button services section modal
 buttonServicesModal()
 
-//Accardion faq section
-accorion()
+//Accordion faq section
+accordion()
 
 //Button Scroll Top
 buttonScrollTop()
