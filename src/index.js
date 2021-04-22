@@ -9,6 +9,8 @@ import accordion from './modules/accordion'
 import buttonScrollTop from './modules/buttonScrollTop'
 import regularExpression from './modules/regularExpression'
 import sendForm from './modules/sendForm'
+import maskPhone from './modules/maskPhone'
+import mobileMenu from './modules/mobileMenu'
 
 //Modal for button call back
 modalCallBackForm()
@@ -36,3 +38,9 @@ regularExpression()
 
 //Send form
 sendForm()
+
+//Mask Phone
+maskPhone()
+
+//Mobile Menu
+mobileMenu()

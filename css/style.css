@@ -448,7 +448,7 @@ a.absolute {
 	opacity: 1;
 }
 .mobile-menu > ul > li > a {
-	display: block;
+	display: inline-block;
 	text-decoration: none;
 	color: #fff;
 	padding: 10px 20px;
